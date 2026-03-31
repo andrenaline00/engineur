@@ -34,10 +34,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean enabled;
 
-    public User() {
-        this.enabled = true;
-    }
-
     public User(String username, String password, String email, String fullName, String role) {
         this.username = username;
         this.password = password;
@@ -130,5 +126,8 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-    // + method is enable ABOVE line 98
+
+    public User() {
+        this.enabled = true;
+    }
 }

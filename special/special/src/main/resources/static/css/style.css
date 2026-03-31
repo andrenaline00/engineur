@@ -1,0 +1,527 @@
+/* ══════════════════════════════════════════════
+   ReqSpec — styles.css
+   Fonts loaded via <link> in auth.html:
+   Syne (headings) + DM Mono (code / labels)
+══════════════════════════════════════════════ */
+
+/* ── Reset & CSS Variables ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #07050f;
+    --surface: #0e0a1a;
+    --surface2: #150f26;
+    --border: rgba(120, 60, 220, 0.25);
+    --border-hi: rgba(160, 90, 255, 0.6);
+    --purple: #a05cff;
+    --purple-lo: rgba(160, 92, 255, 0.12);
+    --purple-md: rgba(160, 92, 255, 0.35);
+    --violet: #6b21e8;
+    --text: #d4c8f0;
+    --muted: #6a5a8a;
+    --white: #f0eaff;
+    --gold: #c9a84c;
+}
+
+/* ── Base ── */
+body {
+    background: var(--bg);
+    font-family: 'Syne', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+/* Noise texture overlay */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* ══════════════════════════════
+   LEFT PANEL — branding
+══════════════════════════════ */
+.left {
+    width: 44%;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 52px 48px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Radial glow blobs */
+.left::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(107, 33, 232, 0.35) 0%, transparent 70%);
+    top: -100px;
+    left: -100px;
+    pointer-events: none;
+}
+
+.left::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(160, 92, 255, 0.15) 0%, transparent 70%);
+    bottom: 60px;
+    right: -60px;
+    pointer-events: none;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-mark {
+    width: 40px;
+    height: 40px;
+    background: var(--purple);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 24px rgba(160, 92, 255, 0.5);
+}
+
+.logo-mark svg {
+    width: 18px;
+    height: 18px;
+}
+
+.logo-name {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.logo-name span {
+    color: var(--purple);
+}
+
+/* Hero text */
+.hero {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--purple);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero-tag::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--purple);
+}
+
+.hero h2 {
+    font-size: clamp(28px, 3.2vw, 40px);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+}
+
+.hero h2 em {
+    font-style: normal;
+    color: var(--purple);
+}
+
+.hero p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 320px;
+}
+
+/* Feature list */
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    transition: color 0.2s;
+}
+
+.feature:hover {
+    color: var(--text);
+}
+
+.feat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 8px var(--purple);
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   RIGHT PANEL — forms
+══════════════════════════════ */
+.right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 56px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative circles */
+.right::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    bottom: -80px;
+    right: -80px;
+    pointer-events: none;
+}
+
+.right::after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    bottom: -40px;
+    right: -40px;
+    pointer-events: none;
+}
+
+/* ── Tab switcher ── */
+.tabs {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 36px;
+    width: 100%;
+    max-width: 380px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.25s;
+    color: var(--muted);
+    border: none;
+    background: transparent;
+    font-family: 'Syne', sans-serif;
+}
+
+.tab.active {
+    background: var(--surface2);
+    color: var(--white);
+    border: 1px solid var(--border-hi);
+    box-shadow: 0 0 20px rgba(160, 92, 255, 0.15);
+}
+
+/* ── Form panels ── */
+.form-panel {
+    width: 100%;
+    max-width: 380px;
+    display: none;
+    flex-direction: column;
+    animation: fadeUp 0.35s ease both;
+}
+
+.form-panel.active {
+    display: flex;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 6px;
+}
+
+.form-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+}
+
+/* ── Fields ── */
+.field {
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.field-wrap {
+    position: relative;
+}
+
+.field-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    stroke: var(--muted);
+    pointer-events: none;
+    transition: stroke 0.2s;
+}
+
+.field-wrap:focus-within svg {
+    stroke: var(--purple);
+}
+
+input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    padding: 13px 14px 13px 42px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+input::placeholder {
+    color: #3d2f5e;
+}
+
+input:focus {
+    border-color: var(--border-hi);
+    background: var(--surface2);
+    box-shadow: 0 0 0 3px rgba(160, 92, 255, 0.1);
+}
+
+/* Checkbox + forgot row */
+.check-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.check-row label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.check-row input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    accent-color: var(--purple);
+}
+
+.forgot {
+    font-size: 12px;
+    color: var(--purple);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    transition: opacity 0.2s;
+}
+
+.forgot:hover {
+    opacity: 0.7;
+}
+
+/* ── Submit button ── */
+.btn-primary {
+    width: 100%;
+    background: var(--violet);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 4px 24px rgba(107, 33, 232, 0.4);
+}
+
+/* Inner gloss */
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent);
+    pointer-events: none;
+}
+
+/* Shimmer sweep */
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::after {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    background: var(--purple);
+    box-shadow: 0 4px 36px rgba(160, 92, 255, 0.55);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* ── Password strength meter ── */
+.strength {
+    margin-top: 8px;
+}
+
+.strength-bar {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.s-seg {
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.06);
+    transition: background 0.3s;
+}
+
+.s-seg.weak {
+    background: #e8274b;
+    box-shadow: 0 0 6px rgba(232, 39, 75, 0.5);
+}
+
+.s-seg.medium {
+    background: var(--gold);
+    box-shadow: 0 0 6px rgba(201, 168, 76, 0.5);
+}
+
+.s-seg.strong {
+    background: #4ade80;
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.5);
+}
+
+.strength-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+/* ── Terms line ── */
+.terms {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 16px;
+    line-height: 1.6;
+}
+
+.terms a {
+    color: var(--purple);
+    text-decoration: none;
+}
+
+.terms a:hover {
+    text-decoration: underline;
+}
