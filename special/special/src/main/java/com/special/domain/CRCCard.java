@@ -1,5 +1,11 @@
 package com.special.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.uoi.reqanalysis.domain.Project;
+import com.uoi.reqanalysis.domain.UseCase;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +26,16 @@ public class CRCCard {
 	@Column(name = "collaborations")
 	private String collaborations;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+	
+	private Set<UseCase> useCases = new HashSet<>();
+	
+	public CRCCard(String className, Project project) {
+        this.className = className;
+        this.project = project;
+    }
 	
 	public String getclassname() {
 		return className;
