@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
 @Entity
 @Table(name = "useCases")
 public class UseCase {
@@ -28,9 +30,16 @@ public class UseCase {
     @Column(columnDefinition = "TEXT")
     private String preconditions;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "useCaseActors", joinColumns = @JoinColumn(name = "useCaseID"), inverseJoinColumns = @JoinColumn(name = "actorID"))
+    @ManyToMany
+    @JoinTable(
+        name = "use_case_actors",
+        joinColumns = @JoinColumn(name = "use_case_id"),
+        inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
     private Set<Actor> actors = new HashSet<>();
+
+    @ManyToMany(mappedBy = "useCases")
+    private Set<CRCCard> crcCards = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "projectID", nullable = false)

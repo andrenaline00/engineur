@@ -29,6 +29,12 @@ public class CRCCard {
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 	
+	@ManyToMany
+    @JoinTable(
+        name = "crc_card_use_cases",
+        joinColumns = @JoinColumn(name = "crc_card_id"),
+        inverseJoinColumns = @JoinColumn(name = "use_case_id")
+    )
 	private Set<UseCase> useCases = new HashSet<>();
 	
 	public CRCCard(String className, Project project) {
