@@ -8,4 +8,8 @@ public interface ProjectRepo {
     List<Project> findByUserID(Long userID);
 
     List<Project> findById(Long projectID);
+
+    Project save(Project project);
+
+    void deleteById(Long projectID);
 }

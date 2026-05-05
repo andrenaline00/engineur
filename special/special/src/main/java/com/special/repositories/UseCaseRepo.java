@@ -9,7 +9,8 @@ import java.util.List;
 public interface UseCaseRepo extends JpaRepository<UseCase, Long> {
 	
     List<UseCase> findByProjectID(Long projectID);
-    
+
+    void deleteByProjectID(Long projectID);
 }
 
 

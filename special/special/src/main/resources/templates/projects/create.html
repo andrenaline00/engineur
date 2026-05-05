@@ -1,13 +1,86 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Use Case — ReqSpec</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
+
 <body>
-    <h2>Create Project</h2>
-    <p th:text="'Creating project for user: ' + ${user.username}"></p>
+
+<nav>
+    <a class="nav-logo" th:href="@{/dashboard}">Req<span>Spec</span></a>
+    <div class="nav-right">
+        <span class="nav-user" th:text="${#authentication.principal.username}">username</span>
+        <form th:action="@{/logout}" method="post" style="margin:0">
+            <button type="submit" class="btn btn-ghost btn-sm">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="breadcrumb">
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <span>/</span>
+        <a th:href="@{/project/{id}(id=${project.ID})}" th:text="${project.name}">Project</a>
+        <span>/</span>
+        <span>New Use Case</span>
+    </div>
+
+    <div class="page-header">
+        <div>
+            <div class="page-title">New Use Case</div>
+            <div class="page-sub" th:text="'Project: ' + ${project.name}">Project name</div>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <form th:action="@{/project/{id}/usecase/create(id=${project.ID})}" method="post">
+
+            <div class="field">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" placeholder="e.g. User registers an account" required>
+            </div>
+
+            <div class="field">
+                <label for="preconditions">Preconditions</label>
+                <textarea id="preconditions" name="preconditions"
+                          placeholder="What must be true before this use case begins?"></textarea>
+            </div>
+
+            <div class="field">
+                <label for="mainFlow">Main Flow</label>
+                <textarea id="mainFlow" name="mainFlow" style="min-height:120px"
+                          placeholder="Step-by-step description of the normal course of events."></textarea>
+            </div>
+
+            <div class="field">
+                <label for="altFlows">Alternative Flows</label>
+                <textarea id="altFlows" name="altFlows"
+                          placeholder="Describe any alternative or exceptional paths."></textarea>
+            </div>
+
+            <div class="field">
+                <label for="postconditions">Postconditions</label>
+                <textarea id="postconditions" name="postconditions"
+                          placeholder="What is true after the use case completes?"></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Use Case</button>
+                <a class="btn btn-ghost" th:href="@{/project/{id}(id=${project.ID})}">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+
+</div>
 </body>
 </html>
-

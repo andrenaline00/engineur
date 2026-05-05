@@ -1,9 +1,7 @@
 package com.special.services;
 
-import com.special.domain.Actor;
-import com.special.domain.CRCCard;
-import com.special.domain.Project;
-import com.special.domain.UseCase;
+import com.special.domain.*;
+import com.special.repositories.ActorRepo;
 import com.special.repositories.CRCCardRepo;
 import com.special.repositories.ProjectRepo;
 import com.special.repositories.UseCaseRepo;
@@ -20,18 +18,20 @@ public class ProjectServices {
     //private final CRCCard crcCard;
     private final CRCCardRepo crcCardRepo;
     //gia actor repo
+    private final ActorRepo actorRepo;
     //gia diagram repo
     // gia crc repo
 
-    public ProjectServices(ProjectRepo projectRepo, UseCaseRepo useCaseRepo, CRCCardRepo crcCardRepo) {
+    public ProjectServices(ProjectRepo projectRepo, UseCaseRepo useCaseRepo, CRCCardRepo crcCardRepo, ActorRepo actorRepo) {
         this.projectRepo = projectRepo;
         this.useCaseRepo = useCaseRepo;
         this.crcCardRepo = crcCardRepo;
         //same for the other repos
+        this.actorRepo = actorRepo;
     }
 
     public Project getProject(Long projectID){
-        //return projectRepo.findById(projectID).orElseThrow();
+        //return projectRepo.findById(projectID);
         return null;
     }
 
@@ -43,7 +43,7 @@ public class ProjectServices {
 
     //for projects
     @Transactional
-    public Project createProject(String name,String description,User user){
+    public Project createProject(String name, String description,User user){
         Project project = new Project(name,description,user);
         return projectRepo.save(project);
     }
@@ -52,8 +52,8 @@ public class ProjectServices {
     public void deleteProject(Long projectID){
         //delete all related use cases,actors,diagrams,crc cards
         projectRepo.deleteById(projectID);
-        //useCaseRepo.deleteByProjectID(projectID);
-        //actorRepo.deleteByProjectID(projectID);
+        useCaseRepo.deleteByProjectID(projectID);
+        actorRepo.deleteByProjectID(projectID);
         //diagramRepo.deleteByProjectID(projectID);
         //crcRepo.deleteByProjectID(projectID);
 
@@ -62,29 +62,29 @@ public class ProjectServices {
     //for actors
     @Transactional
     public List<Actor> getActors(Long projectID){
-        //return actorRepo.findByProjectID(projectID);
-        return null;
+        return actorRepo.findByProjectID(projectID);
+        //return null;
     }
 
     public Actor getActor(Long actorID){
-        //return actorRepo.findById(actorID).orElseThrow();
-        return null;
+        return actorRepo.findById(actorID).orElseThrow();
+        //return null;
     }
 
     @Transactional
     public Actor createActor(String name,String description,Long projectID){
         Project project=getProject(projectID);
-        //Actor actor = new Actor(name,description,project);
-        //return actorRepo.save(actor);
-        return null;
+        Actor actor = new Actor(name,description,project);
+        return actorRepo.save(actor);
+        //return null;
     }
 
     @Transactional
     public Actor updateActor(Long actorID, String name, String description){
         Actor actor =getActor(actorID);
         actor.setName(name);
-        //return actorRepo.save(actor);
-        return null;
+        return actorRepo.save(actor);
+        //return null;
     }
 
     @Transactional
@@ -95,7 +95,7 @@ public class ProjectServices {
             useCase.getActors().remove(actor);
             useCaseRepo.save(useCase);
         }
-        //actorRepo.deleteById(actorID);
+        actorRepo.deleteById(actorID);
     }
 
     //for usecases
@@ -139,7 +139,7 @@ public class ProjectServices {
         useCase.setPostconditions(postconditions);
 
         //hashset me actors
-        //Set<Actor> actors = new HashSet<>();
+        Set<Actor> actors = new HashSet<>();
 
         useCase.setActors(actors);
         ;
@@ -162,30 +162,25 @@ public class ProjectServices {
     //CRC cards services
 
     public List<CRCCard> getCrcCards(Long projectId) {
-    	
-    
         return crcCardRepo.findByProjectId(projectId);
         
     }
 
     public CRCCard getCrcCard(Long cardId) {
-    	
-    
         return crcCardRepo.findById(cardId)
             .orElseThrow(() -> new IllegalArgumentException("CRC Card not found"));
     }
 
     @Transactional
     public CRCCard createCrcCard(String className, String responsibilities,
-                                  String collaborations, List<Long> useCaseIds, Long projectId) {
-    	
-        Project project = getProject(projectId);
+                                  String collaborations, List<Long> useCaseIds,Long projectID) {
+        Project project = getProject(projectID);
         CRCCard card = new CRCCard(className, project);
         card.setResponsibilities(responsibilities);
         card.setCollaborations(collaborations);
         
         if (useCaseIds != null && !useCaseIds.isEmpty()) {
-            card.setUseCases(new HashSet<>(UseCaseRepo.findByProjectID(useCaseIds)));
+            card.setUseCases(new HashSet<>(useCaseRepo.findByProjectID(projectID)));
         }
         
         return crcCardRepo.save(card);
@@ -193,14 +188,14 @@ public class ProjectServices {
 
     @Transactional
     public CRCCard updateCrcCard(Long cardId, String className, String responsibilities,
-                                  String collaborations, List<Long> useCaseIds) {
+                                  String collaborations,List<Long> useCaseIds) {
     	
         CRCCard card = getCrcCard(cardId);
         card.setClassname(className);
         card.setResponsibilities(responsibilities);
         card.setCollaborations(collaborations);
         Set<UseCase> useCases = (useCaseIds != null && !useCaseIds.isEmpty())
-            ? new HashSet<>(UseCaseRepo.findByProjectID(useCaseIds))
+            ? new HashSet<>(useCaseRepo.findByProjectID(projectID))
             : new HashSet<>();
         card.setUseCases(useCases);
         
@@ -208,10 +203,8 @@ public class ProjectServices {
     }
 
     @Transactional
-    public void deleteCrcCard(Long cardId) {
-    	
-    
-        crcCardRepo.deleteById(cardId);
+    public void deleteCrcCard(Long cardID) {
+        crcCardRepo.deleteById(cardID);
 	}
 
 
