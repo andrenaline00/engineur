@@ -7,11 +7,14 @@ import com.special.repositories.ProjectRepo;
 import com.special.repositories.UseCaseRepo;
 
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+@Service
 public class ProjectServices {
     private final ProjectRepo projectRepo;
     private final UseCaseRepo useCaseRepo;
@@ -100,7 +103,7 @@ public class ProjectServices {
 
     //for usecases
     public List<UseCase> getUseCase(Long projectID){
-        return UseCaseRepo.findByProjectID(projectID);
+        return useCaseRepo.findByProjectID(projectID);
     }
 
     public UseCase getUseCases(Long useCaseID) {
@@ -131,7 +134,7 @@ public class ProjectServices {
 
     @Transactional
     public UseCase updateUseCase(Long useCaseID,String title,String preconditions,String mainFlow,String altFlows,String postconditions,List<Long> actorIDs) {
-        UseCase useCase = getUseCase(useCaseID);
+        UseCase useCase = getUseCases(useCaseID);
         useCase.setTitle(title);
         useCase.setPreconditions(preconditions);
         useCase.setMainFlow(mainFlow);
@@ -142,20 +145,19 @@ public class ProjectServices {
         Set<Actor> actors = new HashSet<>();
 
         useCase.setActors(actors);
-        ;
         return useCaseRepo.save(useCase);
     }
 
     @Transactional
     public void deleteUseCase(Long useCaseID){
-        UseCase useCase = getUseCase(useCaseID);
+        UseCase useCase = getUseCases(useCaseID);
         //delete all related actors
         useCase.getActors().clear();
         /*
         for (CRCCard card:useCase.getCRCCards()) {
             card.getUseCases().remove(useCase);
         }*/
-        useCaseRepo.delete(useCaseID);
+        useCaseRepo.deleteById(useCaseID);
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -180,7 +182,11 @@ public class ProjectServices {
         card.setCollaborations(collaborations);
         
         if (useCaseIds != null && !useCaseIds.isEmpty()) {
-            card.setUseCases(new HashSet<>(useCaseRepo.findByProjectID(projectID)));
+            Set<UseCase> useCases = new HashSet<>();
+            for (Long useCaseId : useCaseIds) {
+                useCases.add(getUseCases(useCaseId));
+            }
+            card.setUseCases(useCases);
         }
         
         return crcCardRepo.save(card);
@@ -188,15 +194,19 @@ public class ProjectServices {
 
     @Transactional
     public CRCCard updateCrcCard(Long cardId, String className, String responsibilities,
-                                  String collaborations,List<Long> useCaseIds) {
+                                  String collaborations, List<Long> useCaseIds) {
     	
         CRCCard card = getCrcCard(cardId);
         card.setClassname(className);
         card.setResponsibilities(responsibilities);
         card.setCollaborations(collaborations);
-        Set<UseCase> useCases = (useCaseIds != null && !useCaseIds.isEmpty())
-            ? new HashSet<>(useCaseRepo.findByProjectID(projectID))
-            : new HashSet<>();
+        
+        Set<UseCase> useCases = new HashSet<>();
+        if (useCaseIds != null && !useCaseIds.isEmpty()) {
+            for (Long useCaseId : useCaseIds) {
+                useCases.add(getUseCases(useCaseId));
+            }
+        }
         card.setUseCases(useCases);
         
         return crcCardRepo.save(card);

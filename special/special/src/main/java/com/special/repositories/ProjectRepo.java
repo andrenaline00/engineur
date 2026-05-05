@@ -1,15 +1,12 @@
 package com.special.repositories;
 
 import com.special.domain.Project;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ProjectRepo {
+@Repository
+public interface ProjectRepo extends JpaRepository<Project, Long> {
     List<Project> findByUserID(Long userID);
-
-    List<Project> findById(Long projectID);
-
-    Project save(Project project);
-
-    void deleteById(Long projectID);
 }
