@@ -13,6 +13,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
+	
+	private 
 
     private final ProjectServices projectServices; //it needs a constructor on service department
     //private final ActorServices actorServices;//to christiana
