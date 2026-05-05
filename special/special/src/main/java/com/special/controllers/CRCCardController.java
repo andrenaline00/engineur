@@ -19,10 +19,17 @@ public class CRCCardController {
 	
 	private ProjectServices projectService;
 	
+	public CRCCardController(ProjectServices projectService) {
+		
+		
+	}
+	
 	@GetMapping("/new")
-	public String newCRCcard(Model model, @PathVariable ProjectServices projectservice) {
+	public String newCRCcard(Model model, @PathVariable ProjectServices projectservice, @PathVariable Long projectID) {
+		
 		model.addAttribute("project", projectService.getProject(projectID));
         model.addAttribute("useCases", projectService.getUseCases(projectID));
+        
         return "crccards/create";
 		
 	}
