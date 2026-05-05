@@ -5,6 +5,7 @@ import com.special.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 @Controller
 public class UserController {
@@ -44,19 +45,15 @@ public class UserController {
 
     // DASHBOARD
     @GetMapping("/dashboard")
-    public String showDashboard(Model model) {
-        // TODO: Get current user
-        // User currentUser = ...;
-        // model.addAttribute("user", currentUser);
+    public String showDashboard(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("user", user);
         return "dashboard";
     }
 
     // UPDATE PROFILE PAGE
     @GetMapping("/profile")
-    public String showProfile(Model model) {
-        // TODO: Get current user
-        // User currentUser = ...;
-        // model.addAttribute("user", currentUser);
+    public String showProfile(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("user", user);
         return "profile";
     }
 

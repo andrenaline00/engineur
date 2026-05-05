@@ -8,8 +8,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -25,9 +27,12 @@ public class UserService implements UserDetailsService {
         // user.setPassword(passwordEncoder.encode(user.getPassword()));
         // userRepository.save(user);
 
-        // check duplicate email
+        // check duplicate email or username
         if (userRepository.existsByEmail(email)) {
             throw new RuntimeException("Email already in use");
+        }
+        if (userRepository.existsByUsername(username)) {
+            throw new RuntimeException("Username already in use");
         }
 
         // create user
@@ -46,14 +51,17 @@ public class UserService implements UserDetailsService {
     }
 
     // UPDATE PROFILE
-    public User updateProfile(Long userId, String username, String email, String password) {
+    public User updateProfile(long userId, String username, String email, String password) {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // check email αλλαγή
+        // check email ή username αλλαγή
         if (!user.getEmail().equals(email) && userRepository.existsByEmail(email)) {
             throw new RuntimeException("Email already in use");
+        }
+        if (!user.getUsername().equals(username) && userRepository.existsByUsername(username)) {
+            throw new RuntimeException("Username already in use");
         }
 
         user.setUsername(username);
@@ -76,7 +84,7 @@ public class UserService implements UserDetailsService {
     }
 
     // Get user by id
-    public User getUserById(Long id) {
+    public User getUserById(long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
