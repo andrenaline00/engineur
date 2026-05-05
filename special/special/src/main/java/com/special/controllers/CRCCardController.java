@@ -21,10 +21,8 @@ public class CRCCardController {
 	
 	@GetMapping("/new")
 	public String newCRCcard(Model model, @PathVariable ProjectServices projectservice) {
-		
-		model.addAttribute("project", projectService.getProject(projectId));
-        model.addAttribute("useCases", projectService.getUseCases(projectId));
-        
+		model.addAttribute("project", projectService.getProject(projectID));
+        model.addAttribute("useCases", projectService.getUseCases(projectID));
         return "crccards/create";
 		
 	}
