@@ -1,12 +1,15 @@
 package com.special.repositories;
 
+import com.special.domain.CRCCard;
 import com.special.domain.UseCase;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UseCaseRepo {
+public interface UseCaseRepo extends JpaRepository<UseCase, Long> {
+	
     List<UseCase> findByProjectID(Long projectID);
+    
 }
 
 

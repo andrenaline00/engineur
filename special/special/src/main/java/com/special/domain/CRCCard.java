@@ -49,7 +49,7 @@ public class CRCCard {
 		this.id = id;
 	}
 
-	public void setclassname(String className) {
+	public void setClassname(String className) {
 		this.className = className;
 	}
 	
@@ -67,6 +67,11 @@ public class CRCCard {
 	
 	public void setCollaborations(String collaborations) {
 		this.collaborations = collaborations;
+	}
+
+	public void setUseCases(Set<com.special.domain.UseCase> useCases2) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

@@ -1,24 +1,32 @@
 package com.special.services;
 
 import com.special.domain.Actor;
+import com.special.domain.CRCCard;
 import com.special.domain.Project;
 import com.special.domain.UseCase;
+import com.special.repositories.CRCCardRepo;
 import com.special.repositories.ProjectRepo;
 import com.special.repositories.UseCaseRepo;
+
 import jakarta.transaction.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProjectServices {
     private final ProjectRepo projectRepo;
     private final UseCaseRepo useCaseRepo;
+    //private final CRCCard crcCard;
+    private final CRCCardRepo crcCardRepo;
     //gia actor repo
     //gia diagram repo
     // gia crc repo
 
-    public ProjectServices(ProjectRepo projectRepo, UseCaseRepo useCaseRepo) {
+    public ProjectServices(ProjectRepo projectRepo, UseCaseRepo useCaseRepo, CRCCardRepo crcCardRepo) {
         this.projectRepo = projectRepo;
         this.useCaseRepo = useCaseRepo;
+        this.crcCardRepo = crcCardRepo;
         //same for the other repos
     }
 
@@ -150,8 +158,61 @@ public class ProjectServices {
         useCaseRepo.delete(useCaseID);
     }
 
-    //for crc cards
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //CRC cards services
 
+    public List<CRCCard> getCrcCards(Long projectId) {
+    	
+    
+        return crcCardRepo.findByProjectId(projectId);
+        
+    }
+
+    public CRCCard getCrcCard(Long cardId) {
+    	
+    
+        return crcCardRepo.findById(cardId)
+            .orElseThrow(() -> new IllegalArgumentException("CRC Card not found"));
+    }
+
+    @Transactional
+    public CRCCard createCrcCard(String className, String responsibilities,
+                                  String collaborations, List<Long> useCaseIds, Long projectId) {
+    	
+        Project project = getProject(projectId);
+        CRCCard card = new CRCCard(className, project);
+        card.setResponsibilities(responsibilities);
+        card.setCollaborations(collaborations);
+        
+        if (useCaseIds != null && !useCaseIds.isEmpty()) {
+            card.setUseCases(new HashSet<>(UseCaseRepo.findByProjectID(useCaseIds)));
+        }
+        
+        return crcCardRepo.save(card);
+    }
+
+    @Transactional
+    public CRCCard updateCrcCard(Long cardId, String className, String responsibilities,
+                                  String collaborations, List<Long> useCaseIds) {
+    	
+        CRCCard card = getCrcCard(cardId);
+        card.setClassname(className);
+        card.setResponsibilities(responsibilities);
+        card.setCollaborations(collaborations);
+        Set<UseCase> useCases = (useCaseIds != null && !useCaseIds.isEmpty())
+            ? new HashSet<>(UseCaseRepo.findByProjectID(useCaseIds))
+            : new HashSet<>();
+        card.setUseCases(useCases);
+        
+        return crcCardRepo.save(card);
+    }
+
+    @Transactional
+    public void deleteCrcCard(Long cardId) {
+    	
+    
+        crcCardRepo.deleteById(cardId);
+	}
 
 
 }
