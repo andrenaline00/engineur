@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.special.services.ProjectServices;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/project")
