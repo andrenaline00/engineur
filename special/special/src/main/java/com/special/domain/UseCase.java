@@ -24,10 +24,16 @@ public class UseCase {
 
     @Column(columnDefinition = "TEXT")
     private String postconditions;
+    
+    @Column(columnDefinition="TEXT")
+    private String preconditions;
 
-    @ManyToOne(fetch = FetchType.LAZY) //lazy is crazy wtf
+    @ManyToMany(fetch = FetchType.LAZY) //lazy is crazy wtf
     @JoinTable(name="useCaseActors",joinColumns = @JoinColumn(name="useCaseID"),inverseJoinColumns = @JoinColumn(name="actorID"))
     private Set<Actor> actors = new HashSet<>();
+    
+    @ManyToOne
+    private Project project;
 
     public UseCase(String title,Project project){
         this.title=title;
@@ -43,11 +49,11 @@ public class UseCase {
         return title;
     }
 
-    /*
+    
     public String getPreconditions(){
         return preconditions;
     }
-    */
+    
     public String getMainFlow(){
         return mainFlow;
     }
@@ -104,10 +110,10 @@ public class UseCase {
         this.actors=actors;
     }
 
-    /*
+    
     public void addActor(Actor actor){
         this.actors.add(actor);
-    }*/
+    }
 
 
 }
