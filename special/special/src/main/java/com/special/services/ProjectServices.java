@@ -133,7 +133,7 @@ public class ProjectServices {
     }
 
     @Transactional
-    public UseCase updateUseCase(Long useCaseID,String title,String preconditions,String mainFlow,String altFlows,String postconditions,List<Long> actorIDs) {
+    public UseCase updateUseCase(Long useCaseID,String title,String preconditions,String mainFlow,String postconditions,String altFlows,List<Long> actorIDs) {
         UseCase useCase = getUseCases(useCaseID);
         useCase.setTitle(title);
         useCase.setPreconditions(preconditions);
