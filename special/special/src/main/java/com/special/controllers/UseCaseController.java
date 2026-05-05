@@ -35,7 +35,7 @@ public class UseCaseController { //to create,view,delete,update a use case
     public String createNewUseCase(@PathVariable Long projectID, @RequestParam String title, @RequestParam(required = false) String preconditions,
                                    @RequestParam(required = false) String mainFlow, @RequestParam(required = false) String altFlows, @RequestParam(required = false) String postconditions,
                                    @RequestParam(required = false) List<Long> actorIDs, RedirectAttributes redirectAttributes){
-        projectServices.createNewUseCase();
+        projectServices.createNewUseCase(title,preconditions,mainFlow,altFlows,postconditions,actorIDs,projectID);
         return "";
     }
 
