@@ -52,7 +52,7 @@ public class CRCCardController {
             @RequestParam(required = false) List<Long> useCaseIds,
             RedirectAttributes redirectAttributes) {
 		
-		projectService.createCrcCard(id, className, responsibilities, collaborations, useCaseIds);
+		projectService.updateCrcCard(id, className, responsibilities, collaborations, useCaseIds);
 		redirectAttributes.addFlashAttribute("success", "CRC Card updated.");
 		
 		return "redirect:/projects/" + projectId;

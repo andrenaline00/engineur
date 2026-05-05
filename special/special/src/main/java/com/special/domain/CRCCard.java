@@ -3,8 +3,7 @@ package com.special.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.uoi.reqanalysis.domain.Project;
-import com.uoi.reqanalysis.domain.UseCase;
+
 
 import jakarta.persistence.*;
 
