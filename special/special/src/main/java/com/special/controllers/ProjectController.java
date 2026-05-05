@@ -1,12 +1,11 @@
 package com.special.controllers;
 
-import com.special.domain.UseCase;
-import com.special.services.ActorServices;
-import com.special.services.ProjectServices;
+
 import org.springframework.stereotype.Controller; //hmmm
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 //allo ena import
+
+import com.special.services.ProjectServices;
 
 import java.util.List;
 
@@ -14,9 +13,8 @@ import java.util.List;
 @RequestMapping("/project")
 public class ProjectController {
 	
-	private 
 
-    private final ProjectServices projectServices; //it needs a constructor on service department
+    private  ProjectServices projectServices; //it needs a constructor on service department
     //private final ActorServices actorServices;//to christiana
     //private final DiagramService diagramService;
     //and another one for diagram to theodora
