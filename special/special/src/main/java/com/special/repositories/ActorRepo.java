@@ -7,9 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ActorRepo extends JpaRepository<Actor,Long> {
-    void deleteByProjectID(Long projectID);
+public interface ActorRepo extends JpaRepository<Actor, Long> {
+    void deleteByProjectId(Long projectId);
 
-    List<Actor> findByProjectID(Long projectID);
-    //List<Actor> findByProjectID(Long projectID);
+    List<Actor> findByProjectId(Long projectId);
 }
