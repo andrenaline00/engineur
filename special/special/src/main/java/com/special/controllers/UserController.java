@@ -40,7 +40,7 @@ public class UserController {
     // LOGIN PAGE
     @GetMapping("/login")
     public String showLoginForm() {
-        return "login";
+        return "auth/login";
     }
 
     // DASHBOARD

@@ -1,0 +1,37 @@
+/* Χρώματα σου */
+:root {
+    --bs-primary: #7c3aed;   /* override του Bootstrap primary */
+    --my-purple:  #7c3aed;
+    --my-pink:    #ec4899;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--my-purple);
+    border-color: var(--my-purple);
+}
+.btn-primary:hover {
+    background-color: #6a0dad;
+    border-color: #6a0dad;
+}
+
+/* Links */
+a {
+    color: var(--my-purple);
+}
+
+/* Form focus  */
+.form-control:focus {
+    border-color: var(--my-purple);
+    box-shadow: 0 0 0 3px rgba(124,58,237,.2);
+}
+
+/* Navbar / Header */
+.navbar {
+    background-color: var(--my-purple) !important;
+}
+
+/* Ροζ accent για details */
+.text-pink   { color: var(--my-pink); }
+.border-pink { border-color: var(--my-pink) !important; }
+
