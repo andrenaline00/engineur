@@ -14,11 +14,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/projects/{projectID}/actors")
 public class ActorController {
-    private final ActorServices actorService;
+
+    // private final ActorServices actorService;
     private final ProjectServices projectService;
 
     public ActorController(ActorServices actorService, ProjectServices projectService) {
-        this.actorService = actorService;
+        // this.actorService = actorService;
         this.projectService = projectService;
     }
 
@@ -29,12 +30,12 @@ public class ActorController {
     }
 
     @PostMapping
-    public String createActor(@PathVariable Long projectID, 
-                             @RequestParam String name, 
-                             @RequestParam(required = false) String description,
-                             RedirectAttributes redirectAttributes) {
+    public String createActor(@PathVariable Long projectID,
+            @RequestParam String name,
+            @RequestParam(required = false) String description,
+            RedirectAttributes redirectAttributes) {
         projectService.createActor(name, description, projectID);
-        redirectAttributes.addFlashAttribute("success", "Actor created successfully");
+        redirectAttributes.addFlashAttribute("success", "A new actor joined the army!");
         return "redirect:/projects/" + projectID;
     }
 
@@ -54,20 +55,20 @@ public class ActorController {
     }
 
     @PostMapping("/{actorID}")
-    public String updateActor(@PathVariable Long projectID, 
-                             @PathVariable Long actorID, 
-                             @RequestParam String name, 
-                             @RequestParam(required = false) String description,
-                             RedirectAttributes redirectAttributes) {
+    public String updateActor(@PathVariable Long projectID,
+            @PathVariable Long actorID,
+            @RequestParam String name,
+            @RequestParam(required = false) String description,
+            RedirectAttributes redirectAttributes) {
         projectService.updateActor(actorID, name, description);
         redirectAttributes.addFlashAttribute("success", "Actor updated successfully");
         return "redirect:/projects/" + projectID;
     }
 
     @PostMapping("/{actorID}/delete")
-    public String deleteActor(@PathVariable Long projectID, 
-                             @PathVariable Long actorID, 
-                             RedirectAttributes redirectAttributes) {
+    public String deleteActor(@PathVariable Long projectID,
+            @PathVariable Long actorID,
+            RedirectAttributes redirectAttributes) {
         projectService.deleteActor(actorID);
         redirectAttributes.addFlashAttribute("success", "Actor deleted successfully");
         return "redirect:/projects/" + projectID;
