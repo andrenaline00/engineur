@@ -2,7 +2,7 @@ package com.special.controllers;
 
 import com.special.domain.Actor;
 import com.special.services.ProjectServices;
-import com.special.services.ActorServices;
+//import com.special.services.ActorServices;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ public class ActorController {
     // private final ActorServices actorService;
     private final ProjectServices projectService;
 
-    public ActorController(ActorServices actorService, ProjectServices projectService) {
+    public ActorController(ProjectServices projectService) {
         // this.actorService = actorService;
         this.projectService = projectService;
     }
