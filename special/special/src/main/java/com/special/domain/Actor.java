@@ -1,15 +1,16 @@
 package com.special.domain;
+
 import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="actors")
+@Table(name = "actors")
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -23,18 +24,19 @@ public class Actor {
 
     @ManyToMany(mappedBy = "actors")
     private Set<UseCase> useCases = new HashSet<>();
-    protected Actor() {
-    } //tf is this for?
 
-    public Actor(String name,String description,Project project) {
-        this.name=name;
-        this.description=description;
-        this.project=project;
+    protected Actor() {
+    } // tf is this for?
+
+    public Actor(String name, String description, Project project) {
+        this.name = name;
+        this.description = description;
+        this.project = project;
     }
 
-    //getters
-    public Long getID() {
-        return ID;
+    // getters
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -53,7 +55,7 @@ public class Actor {
         return useCases;
     }
 
-    //setters
+    // setters
     public void setName(String name) {
         this.name = name;
     }
@@ -67,10 +69,7 @@ public class Actor {
     }
 
     public void setUseCases(Set<UseCase> useCases) {
-        this.useCases=useCases;
+        this.useCases = useCases;
     }
-
-
-
 
 }

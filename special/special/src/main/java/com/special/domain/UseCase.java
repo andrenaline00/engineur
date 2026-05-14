@@ -6,14 +6,12 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
-
 @Entity
 @Table(name = "useCases")
 public class UseCase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // da fak
-    private Long ID;
+    private Long id;
 
     @Column(nullable = false) // whats nullable
     private String title;
@@ -31,11 +29,7 @@ public class UseCase {
     private String preconditions;
 
     @ManyToMany
-    @JoinTable(
-        name = "use_case_actors",
-        joinColumns = @JoinColumn(name = "use_case_id"),
-        inverseJoinColumns = @JoinColumn(name = "actor_id")
-    )
+    @JoinTable(name = "use_case_actors", joinColumns = @JoinColumn(name = "use_case_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private Set<Actor> actors = new HashSet<>();
 
     @ManyToMany(mappedBy = "useCases")
@@ -61,8 +55,8 @@ public class UseCase {
     }
 
     // GETTERS
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {

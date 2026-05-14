@@ -20,7 +20,7 @@ public class ActorServices {
     }
 
     public List<Actor> getActorsForProject(Long projectID) {
-        return actorRepo.findByProjectID(projectID);
+        return actorRepo.findByProjectId(projectID);
     }
 
     public Actor getActor(Long actorID) {
@@ -28,11 +28,11 @@ public class ActorServices {
     }
 
     @Transactional
-    public Actor createActor(String name, String description, Project project){
-        //or apla
+    public Actor createActor(String name, String description, Project project) {
+        // or apla
         Actor myActor = new Actor(name, description, project);
         return actorRepo.save(myActor);
-        //return actorRepo.save(new Actor(name, description, project));
+        // return actorRepo.save(new Actor(name, description, project));
     }
 
     @Transactional
@@ -46,13 +46,10 @@ public class ActorServices {
     @Transactional
     public void deleteActor(Long actorID) {
         Actor actor = getActor(actorID);
-        //remove associations with use cases
+        // remove associations with use cases
         actor.getUseCases().forEach(useCase -> useCase.getActors().remove(actor));
         useCaseRepo.saveAll(actor.getUseCases());
         actorRepo.delete(actor);
     }
-
-
-
 
 }
