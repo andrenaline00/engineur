@@ -1,6 +1,18 @@
 package com.special.diagrams;
 
-public interface ClassDiagramFactory {
-	
-	
+import org.springframework.stereotype.Component;
+
+
+@Component
+public class ClassDiagramFactory {
+
+    public ClassDiagramStrategy create(String tool) {
+        return switch (tool.toLowerCase()) {
+        
+            case "plantuml" -> new PlantUMLClassDiagram();
+            case "nomnoml" -> new NomnomlClassDiagram();
+            default -> throw new IllegalArgumentException("Unsupported UML tool: " + tool);
+            
+        };
+    }
 }
