@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="Special — Design and visualize software requirements"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+
+    <title>Special — Home</title>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md navbar-dark">
+    <a class="navbar-brand font-weight-bold" th:href="@{/}">Special</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/register}">Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero section -->
+<section class="container py-5">
+    <div class="row align-items-center min-vh-75">
+        <div class="col-md-7">
+            <h1 class="display-3 font-weight-bold mb-3">
+                Design &amp; <span class="text-pink">Visualize</span><br/>
+                Requirements
+            </h1>
+            <p class="lead text-muted mb-4">
+                A comprehensive platform for capturing, designing, and validating
+                software specifications through CRC cards, use cases, and class diagrams.
+            </p>
+
+            <div class="mb-4">
+                <a th:href="@{/register}" class="btn btn-primary btn-lg mr-2">Get Started</a>
+                <a th:href="@{/login}" class="btn btn-outline-secondary btn-lg">Sign In</a>
+            </div>
+        </div>
+
+        <div class="col-md-5 text-center">
+            <div class="p-4 border border-pink rounded shadow-sm">
+                <h4 class="text-pink mb-3">// software engineering</h4>
+                <p class="text-muted mb-0">
+                    Build better requirements with structured modeling tools designed
+                    for engineers and teams.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features section -->
+<section class="container py-5">
+    <h2 class="text-center mb-5 font-weight-bold">What you can do</h2>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-pink">Use Case Modeling</h5>
+                    <p class="card-text text-muted">
+                        Define actors, scenarios, and use cases to capture system behavior clearly.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-pink">CRC Cards</h5>
+                    <p class="card-text text-muted">
+                        Organize classes, responsibilities, and collaborations the right way.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-pink">UML Diagrams</h5>
+                    <p class="card-text text-muted">
+                        Generate class and use case diagrams automatically from your models.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="container py-4 text-center text-muted">
+    <hr/>
+    <small>&copy; 2026 Special — Software Engineering Platform</small>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
+
+</body>
+</html>
