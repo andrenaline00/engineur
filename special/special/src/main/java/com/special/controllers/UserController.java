@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
@@ -16,6 +17,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
+
     // REGISTER PAGE
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -25,15 +32,15 @@ public class UserController {
 
     // REGISTER POST
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user, Model model) {
+    public String registerUser(@ModelAttribute("user") User user, Model model, RedirectAttributes redirect) {
 
         try {
             userService.registerUser(user.getUsername(), user.getEmail(), user.getPassword());
-            model.addAttribute("success", "Registration successful! Please login.");
-            return "login";
+            redirect.addFlashAttribute("success", "Registration successful! Please login.");
+            return "redirect:/auth/login";
         } catch (RuntimeException e) {
-            model.addAttribute("error", e.getMessage());
-            return "register";
+            redirect.addFlashAttribute("error" ,e.getMessage());
+            return "redirect:/register";
         }
     }
 
@@ -47,7 +54,7 @@ public class UserController {
     @GetMapping("/dashboard")
     public String showDashboard(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
-        return "dashboard";
+        return "layout/dashboard";
     }
 
     // UPDATE PROFILE PAGE

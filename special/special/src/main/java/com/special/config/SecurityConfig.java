@@ -1,5 +1,6 @@
 package com.special.config;
 
+import jakarta.servlet.DispatcherType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,15 +31,17 @@ public class SecurityConfig {
                 // AUTHORIZATION: Define which endpoints are public and which require
                 // authentication.
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "/login").permitAll()
+                        .dispatcherTypeMatchers(DispatcherType.ERROR, DispatcherType.FORWARD).permitAll() // Allow error and forward dispatches
+                        .requestMatchers("/","/register", "/login","/error").permitAll()
                         // Allow access to all static resources (CSS, JS, Images, Assets, Favicon)
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/assets/**", "/favicon.ico").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()) //changed from authenticated() to permitAll() for testing purposes, should be changed back to authenticated() in production
 
                 // FORM LOGIN
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/dashboard", true)
+                        .failureUrl("/login?error=true")
                         .permitAll())
 
                 // REMEMBER ME BUTTON
