@@ -1,4 +1,4 @@
-/* Χρώματα σου */
+/* colors */
 :root {
     --bs-primary: #7c3aed;   /* override του Bootstrap primary */
     --my-purple:  #7c3aed;
@@ -31,7 +31,43 @@ a {
     background-color: var(--my-purple) !important;
 }
 
-/* Ροζ accent για details */
+/* rose accent gia details */
 .text-pink   { color: var(--my-pink); }
 .border-pink { border-color: var(--my-pink) !important; }
+
+.button {
+	            background-color: #7b5cb5; 
+	            border: none;
+	            color: white;
+	            padding: 20px;
+	            text-align: center;
+	            text-decoration: none;
+	            display: inline-block;
+	            font-size: 16px;
+	            margin: 4px 2px;
+	            cursor: pointer;
+}
+
+.header {
+	            background-color: #7b5cb5;
+	            text-align: center;
+	            padding: 20px;
+            }
+            
+body{
+	            
+	            font-family: "Times New Roman", Times, serif;
+}
+
+.register-link {
+    color: #942862;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+	        
+.p1{font-family: "Lucida Console", "Courier New", monospace;}
 
