@@ -20,7 +20,7 @@ public class UserController {
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "register"; // html
+        return "auth/register";
     }
 
     // REGISTER POST
@@ -30,10 +30,10 @@ public class UserController {
         try {
             userService.registerUser(user.getUsername(), user.getEmail(), user.getPassword());
             model.addAttribute("success", "Registration successful! Please login.");
-            return "login";
+            return "auth/login";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            return "register";
+            return "auth/register";
         }
     }
 
@@ -47,14 +47,14 @@ public class UserController {
     @GetMapping("/dashboard")
     public String showDashboard(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
-        return "dashboard";
+        return "layout/dashboard";
     }
 
     // UPDATE PROFILE PAGE
     @GetMapping("/profile")
     public String showProfile(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
-        return "profile";
+        return "user/profile";
     }
 
     // UPDATE PROFILE POST
@@ -69,10 +69,10 @@ public class UserController {
             User updatedUser = userService.updateProfile(id, username, email, password);
             model.addAttribute("success", "Profile updated successfully!");
             model.addAttribute("user", updatedUser);
-            return "profile";
+            return "user/profile";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            return "profile";
+            return "user/profile";
         }
     }
 }
