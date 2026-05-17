@@ -54,6 +54,10 @@ public class UseCase {
         this.project = project;
     }
 
+    protected UseCase() {
+
+    }
+
     // GETTERS
     public Long getId() {
         return id;

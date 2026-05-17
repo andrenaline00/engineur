@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/projects/{projectID}/usecases")
 public class UseCaseController { // to create,view,delete,update a use case
 
     private final ProjectServices projectServices; // pedio
@@ -36,7 +36,8 @@ public class UseCaseController { // to create,view,delete,update a use case
             @RequestParam(required = false) String postconditions,
             @RequestParam(required = false) List<Long> actorIDs, RedirectAttributes redirectAttributes) {
         projectServices.createNewUseCase(title, preconditions, mainFlow, altFlows, postconditions, actorIDs, projectID);
-        return "";
+        redirectAttributes.addFlashAttribute("success", "Use case created successfully");
+        return "redirect:/projects/" + projectID;
     }
 
     @GetMapping() // add path to fetch data
@@ -54,7 +55,7 @@ public class UseCaseController { // to create,view,delete,update a use case
             @RequestParam(required = false) String postConditions, RedirectAttributes redirectAttributes) {
         projectServices.updateUseCase(ID, title, preconditions, mainFlow, postConditions, altFlows, actorIDs);
         redirectAttributes.addFlashAttribute("success", "use case updated succesfully");
-        return "redirect:/projects" + projectID;
+        return "redirect:/projects/" + projectID;
     }
 
     @PostMapping("/{id}/delete")

@@ -54,7 +54,7 @@ public class ProjectController {
     public String viewProject(@PathVariable Long id, Model model) {
         Project project = projectServices.getProject(id);
         model.addAttribute("project", project);
-        model.addAttribute("useCases", projectServices.getUseCase(id));
+        model.addAttribute("useCases", projectServices.getUseCases(id));
         model.addAttribute("actors", projectServices.getActors(id));
         model.addAttribute("crcCards", projectServices.getCrcCards(id));
         return "projects/view";

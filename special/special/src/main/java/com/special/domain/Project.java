@@ -39,6 +39,10 @@ public class Project {
         this.user = user;
     }
 
+    protected Project() {
+
+    }
+
     // GETTERS
     public Long getId() {
         return id;

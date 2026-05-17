@@ -36,6 +36,10 @@ public class CRCCard {
 		this.project = project;
 	}
 
+	protected CRCCard() {
+
+	}
+
 	public Long getId() {
 		return id;
 	}

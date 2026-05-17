@@ -34,8 +34,8 @@ public class ProjectServices {
     }
 
     public Project getProject(Long projectID) {
-        // return projectRepo.findById(projectID);
-        return null;
+        return projectRepo.findById(projectID).orElseThrow();
+        // return null;
     }
 
     public List<Project> getProjectsForUser(Long userID) {
@@ -52,13 +52,8 @@ public class ProjectServices {
 
     @Transactional
     public void deleteProject(Long projectID) {
-        // delete all related use cases,actors,diagrams,crc cards
+        // cascade = ALL + orphanRemoval on Project handles child deletion automatically
         projectRepo.deleteById(projectID);
-        useCaseRepo.deleteByProjectId(projectID);
-        actorRepo.deleteByProjectId(projectID);
-        // diagramRepo.deleteByProjectID(projectID);
-        // crcRepo.deleteByProjectID(projectID);
-
     }
 
     // for actors
@@ -85,8 +80,8 @@ public class ProjectServices {
     public Actor updateActor(Long actorID, String name, String description) {
         Actor actor = getActor(actorID);
         actor.setName(name);
+        actor.setDescription(description);
         return actorRepo.save(actor);
-        // return null;
     }
 
     @Transactional
@@ -101,11 +96,11 @@ public class ProjectServices {
     }
 
     // for usecases
-    public List<UseCase> getUseCase(Long projectID) {
+    public List<UseCase> getUseCases(Long projectID) {
         return useCaseRepo.findByProjectId(projectID);
     }
 
-    public UseCase getUseCases(Long useCaseID) {
+    public UseCase getUseCase(Long useCaseID) {
         return useCaseRepo.findById(useCaseID).orElseThrow();
     }
 
@@ -126,9 +121,11 @@ public class ProjectServices {
          * }
          */
 
-        for (Long actorID : actorIDs) {
-            Actor actor = getActor(actorID);
-            useCase.getActors().add(actor);
+        if (actorIDs != null) {
+            for (Long actorID : actorIDs) {
+                Actor actor = getActor(actorID);
+                useCase.getActors().add(actor);
+            }
         }
         return useCaseRepo.save(useCase);
 
@@ -137,23 +134,26 @@ public class ProjectServices {
     @Transactional
     public UseCase updateUseCase(Long useCaseID, String title, String preconditions, String mainFlow,
             String postconditions, String altFlows, List<Long> actorIDs) {
-        UseCase useCase = getUseCases(useCaseID);
+        UseCase useCase = getUseCase(useCaseID);
         useCase.setTitle(title);
         useCase.setPreconditions(preconditions);
         useCase.setMainFlow(mainFlow);
         useCase.setAltFlows(altFlows);
         useCase.setPostconditions(postconditions);
 
-        // hashset me actors
         Set<Actor> actors = new HashSet<>();
-
+        if (actorIDs != null) {
+            for (Long actorID : actorIDs) {
+                actors.add(getActor(actorID));
+            }
+        }
         useCase.setActors(actors);
         return useCaseRepo.save(useCase);
     }
 
     @Transactional
     public void deleteUseCase(Long useCaseID) {
-        UseCase useCase = getUseCases(useCaseID);
+        UseCase useCase = getUseCase(useCaseID);
         // delete all related actors
         useCase.getActors().clear();
         /*
@@ -188,7 +188,7 @@ public class ProjectServices {
         if (useCaseIds != null && !useCaseIds.isEmpty()) {
             Set<UseCase> useCases = new HashSet<>();
             for (Long useCaseId : useCaseIds) {
-                useCases.add(getUseCases(useCaseId));
+                useCases.add(getUseCase(useCaseId));
             }
             card.setUseCases(useCases);
         }
@@ -208,7 +208,7 @@ public class ProjectServices {
         Set<UseCase> useCases = new HashSet<>();
         if (useCaseIds != null && !useCaseIds.isEmpty()) {
             for (Long useCaseId : useCaseIds) {
-                useCases.add(getUseCases(useCaseId));
+                useCases.add(getUseCase(useCaseId));
             }
         }
         card.setUseCases(useCases);
