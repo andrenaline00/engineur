@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -15,7 +16,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap"
+        rel="stylesheet">
 
     <title>Register — Special</title>
 </head>
@@ -37,7 +40,8 @@
         <div class="hero">
             <div class="hero-tag">Software Engineering</div>
             <h2>Design &amp;<br><em>Visualize</em><br>Requirements</h2>
-            <p>A comprehensive platform for capturing, designing, and validating software specifications through CRC cards, use cases, and class diagrams.</p>
+            <p>A comprehensive platform for capturing, designing, and validating software specifications through CRC
+                cards, use cases, and class diagrams.</p>
         </div>
 
         <div class="features">
@@ -181,7 +185,8 @@
                 </div>
 
                 <!-- Success Message -->
-                <div th:if="${successMessage}" class="alert alert-success alert-sm" role="alert" th:utext="${successMessage}">
+                <div th:if="${successMessage}" class="alert alert-success alert-sm" role="alert"
+                    th:utext="${successMessage}">
                 </div>
 
                 <button type="submit" class="btn-primary" style="margin-top:8px">Create Account</button>
@@ -195,8 +200,12 @@
     </div><!-- /.right -->
 
     <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV"
+        crossorigin="anonymous"></script>
 
     <!-- Auth Script -->
     <script th:src="@{/js/auth.js}"></script>
@@ -215,8 +224,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-          crossorigin="anonymous">
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/main.css}" />
@@ -226,134 +234,100 @@
 
 <body>
 
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card shadow-lg" style="width: 450px;">
-        <div class="card-body p-5">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow-lg" style="width: 450px;">
+            <div class="card-body p-5">
 
-            <h2 class="card-title text-center mb-4">Register</h2>
+                <h2 class="card-title text-center mb-4">Register</h2>
 
-            <form th:action="@{/register}" method="POST">
+                <form th:action="@{/register}" method="POST">
 
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text"
-                           class="form-control"
-                           id="firstName"
-                           name="firstName"
-                           placeholder="Enter your first name"
-                           required>
-                </div>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName"
+                            placeholder="Enter your first name" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text"
-                           class="form-control"
-                           id="lastName"
-                           name="lastName"
-                           placeholder="Enter your last name"
-                           required>
-                </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName"
+                            placeholder="Enter your last name" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text"
-                           class="form-control"
-                           id="username"
-                           name="username"
-                           placeholder="Choose a username"
-                           required>
-                </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username"
+                            placeholder="Choose a username" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email"
-                           class="form-control"
-                           id="email"
-                           name="email"
-                           placeholder="Enter your email"
-                           required>
-                </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
+                            required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password"
-                           class="form-control"
-                           id="password"
-                           name="password"
-                           placeholder="Create a password"
-                           required>
-                </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Create a password" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password"
-                           class="form-control"
-                           id="confirmPassword"
-                           name="confirmPassword"
-                           placeholder="Confirm your password"
-                           required>
-                </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                            placeholder="Confirm your password" required>
+                    </div>
 
-                <!-- Error Message -->
-                <div th:if="${errorMessage}"
-                     class="alert alert-danger alert-dismissible fade show"
-                     role="alert">
+                    <!-- Error Message -->
+                    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
 
-                    <span th:text="${errorMessage}"></span>
+                        <span th:text="${errorMessage}"></span>
 
-                    <button type="button"
-                            class="close"
-                            data-dismiss="alert"
-                            aria-label="Close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 
-                        <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+
+                        <span th:text="${successMessage}"></span>
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-block mb-3">
+                        Create Account
                     </button>
-                </div>
 
-                <!-- Success Message -->
-                <div th:if="${successMessage}"
-                     class="alert alert-success alert-dismissible fade show"
-                     role="alert">
+                </form>
 
-                    <span th:text="${successMessage}"></span>
+                <hr>
 
-                    <button type="button"
-                            class="close"
-                            data-dismiss="alert"
-                            aria-label="Close">
+                <p class="text-center mb-0">
+                    Already have an account?
+                    <a th:href="@{/login}" class="font-weight-bold">
+                        Login here
+                    </a>
+                </p>
 
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <button type="submit"
-                        class="btn btn-success btn-block mb-3">
-                    Create Account
-                </button>
-
-            </form>
-
-            <hr>
-
-            <p class="text-center mb-0">
-                Already have an account?
-                <a th:href="@{/login}" class="font-weight-bold">
-                    Login here
-                </a>
-            </p>
-
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV"
         crossorigin="anonymous"></script>
 
 </body>
+
 </html>
