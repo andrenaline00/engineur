@@ -17,7 +17,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/main.css}" />
 
-    <title>New CRC Card | Special</title>
+    <title>Edit CRC Card | Special</title>
 
     <style>
         :root {
@@ -140,14 +140,17 @@
                 </a>
 
                 <div class="premium-card">
-                    <h1 class="mb-2" style="color: var(--primary);">New CRC Card</h1>
-                    <p class="text-muted mb-5">Define Class, Responsibility, and Collaboration mapping.</p>
+                    <h1 class="mb-2" style="color: var(--primary);">Edit CRC Card</h1>
+                    <p class="text-muted mb-5">Refine the specifications for "<span
+                            th:text="${crcCard.className}">Class</span>".</p>
 
-                    <form th:action="@{/projects/{projectID}/crccards(projectID=${project.id})}" method="post">
+                    <form th:action="@{/projects/{projectID}/crccards/{id}(projectID=${project.id}, id=${crcCard.id})}"
+                        method="post">
 
                         <div class="form-group mb-4">
                             <label class="form-label">Class Name</label>
-                            <input type="text" name="className" class="form-control" placeholder="e.g., User" required>
+                            <input type="text" name="className" class="form-control" th:value="${crcCard.className}"
+                                required>
                         </div>
 
                         <div class="section-header">
@@ -157,13 +160,13 @@
                         <div class="form-group mb-4">
                             <label class="form-label">Responsibilities</label>
                             <textarea name="responsibilities" class="form-control" rows="4"
-                                placeholder="What is this class supposed to do?"></textarea>
+                                th:text="${crcCard.responsibilities}"></textarea>
                         </div>
 
                         <div class="form-group mb-4">
                             <label class="form-label">Collaborations</label>
                             <textarea name="collaborations" class="form-control" rows="4"
-                                placeholder="Which other classes does this communicate with?"></textarea>
+                                th:text="${crcCard.collaborations}"></textarea>
                         </div>
 
                         <div class="section-header">
@@ -171,19 +174,17 @@
                         </div>
 
                         <div class="mb-5">
-                            <div th:if="${#lists.isEmpty(useCases)}" class="text-muted small italic">
-                                No use cases defined in this project.
-                            </div>
                             <div class="d-flex flex-wrap gap-2">
                                 <label th:each="uc : ${useCases}" class="uc-toggle mr-2">
-                                    <input type="checkbox" name="useCaseIds" th:value="${uc.id}">
+                                    <input type="checkbox" name="useCaseIds" th:value="${uc.id}"
+                                        th:checked="${crcCard.useCases.contains(uc)}">
                                     <span th:text="${uc.title}">Use Case Title</span>
                                 </label>
                             </div>
                         </div>
 
                         <div class="pt-4 border-top border-soft d-flex justify-content-between align-items-center">
-                            <button type="submit" class="btn btn-premium">Save CRC Card</button>
+                            <button type="submit" class="btn btn-premium">Save Changes</button>
                             <a th:href="@{/projects/{id}(id=${project.id})}" class="text-muted">Cancel</a>
                         </div>
                     </form>

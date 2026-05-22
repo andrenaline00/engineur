@@ -12,10 +12,10 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // dafuq
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)

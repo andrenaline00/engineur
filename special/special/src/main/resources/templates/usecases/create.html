@@ -17,22 +17,27 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/main.css}" />
 
-    <title>New CRC Card | Special</title>
+    <title>New Use Case | Special</title>
 
     <style>
         :root {
             --primary: #7c3aed;
             --primary-light: #a78bfa;
             --accent: #ec4899;
-            --bg-light: #f5f3ff;
-            --border-soft: #e2e8f0;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --bg-dark: #0f172a;
         }
 
         body {
-            background-color: var(--bg-light);
+            background-color: #f5f3ff;
             color: #1e293b;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
+        }
+
+        .mesh-bg {
+            display: none;
         }
 
         .premium-card {
@@ -52,7 +57,7 @@
 
         .form-control {
             background: #fff;
-            border: 1px solid var(--border-soft);
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
             color: #1e293b;
             padding: 0.75rem 1rem;
@@ -63,12 +68,12 @@
             background: #fff;
             border-color: var(--primary-light);
             box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
-            outline: none;
+            color: #1e293b;
         }
 
         .form-label {
             font-weight: 600;
-            color: #64748b;
+            color: #94a3b8;
             margin-bottom: 0.5rem;
             font-size: 0.875rem;
             text-transform: uppercase;
@@ -91,15 +96,9 @@
             box-shadow: 0 10px 20px -5px rgba(124, 58, 237, 0.5);
         }
 
-        .section-header {
-            border-left: 3px solid var(--primary);
-            padding-left: 1rem;
-            margin: 2rem 0 1.5rem;
-        }
-
-        .uc-toggle {
-            background: var(--bg-light);
-            border: 1px solid var(--border-soft);
+        .actor-checkbox {
+            background: #f5f3ff;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
             padding: 0.6rem 1.2rem;
             margin-bottom: 0.5rem;
@@ -111,79 +110,115 @@
             color: #64748b;
         }
 
-        .uc-toggle:hover {
+        .actor-checkbox:hover {
             border-color: var(--primary-light);
             background: #fdf2f8;
         }
 
-        .uc-toggle input {
+        .actor-checkbox input {
             display: none;
         }
 
-        .uc-toggle:has(input:checked) {
+        .actor-checkbox.active,
+        .actor-checkbox:has(input:checked) {
             border-color: var(--primary);
             background: var(--primary);
             color: white;
             box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
         }
+
+        .actor-checkbox:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .actor-checkbox input {
+            margin-right: 0.75rem;
+        }
+
+        .section-header {
+            border-left: 3px solid var(--primary);
+            padding-left: 1rem;
+            margin: 2rem 0 1.5rem;
+        }
     </style>
 </head>
 
 <body>
+    <div class="mesh-bg"></div>
+
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10 col-xl-8">
 
                 <a th:href="@{/projects/{id}(id=${project.id})}"
-                    class="text-muted text-decoration-none mb-4 d-inline-block">
+                    class="text-muted-alt text-decoration-none mb-4 d-inline-block">
                     &larr; Back to <span th:text="${project.name}">Project</span>
                 </a>
 
                 <div class="premium-card">
-                    <h1 class="mb-2" style="color: var(--primary);">New CRC Card</h1>
-                    <p class="text-muted mb-5">Define Class, Responsibility, and Collaboration mapping.</p>
+                    <h1 class="mb-2" style="color: var(--primary);">Create Use Case</h1>
+                    <p class="text-muted mb-5">Define your system requirements with precision.</p>
 
-                    <form th:action="@{/projects/{projectID}/crccards(projectID=${project.id})}" method="post">
+                    <form th:action="@{/projects/{projectID}/usecases(projectID=${project.id})}" method="post">
 
                         <div class="form-group mb-4">
-                            <label class="form-label">Class Name</label>
-                            <input type="text" name="className" class="form-control" placeholder="e.g., User" required>
+                            <label class="form-label">Use Case Title</label>
+                            <input type="text" name="title" class="form-control" placeholder="e.g., Authenticate User"
+                                required>
                         </div>
 
                         <div class="section-header">
-                            <h2 class="h5 mb-0">Core Attributes</h2>
+                            <h2 class="h5 mb-0">Context & Scope</h2>
                         </div>
 
-                        <div class="form-group mb-4">
-                            <label class="form-label">Responsibilities</label>
-                            <textarea name="responsibilities" class="form-control" rows="4"
-                                placeholder="What is this class supposed to do?"></textarea>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label class="form-label">Collaborations</label>
-                            <textarea name="collaborations" class="form-control" rows="4"
-                                placeholder="Which other classes does this communicate with?"></textarea>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Preconditions</label>
+                                <textarea name="preconditions" class="form-control" rows="3"
+                                    placeholder="What must be true before this starts?"></textarea>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Postconditions</label>
+                                <textarea name="postconditions" class="form-control" rows="3"
+                                    placeholder="What will be true after successful completion?"></textarea>
+                            </div>
                         </div>
 
                         <div class="section-header">
-                            <h2 class="h5 mb-0">Linked Use Cases</h2>
+                            <h2 class="h5 mb-0">Behaviors</h2>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label class="form-label">Main Success Flow</label>
+                            <textarea name="mainFlow" class="form-control" rows="6"
+                                placeholder="1. User enters credentials...&#10;2. System validates..."></textarea>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label class="form-label">Alternative Flows / Errors</label>
+                            <textarea name="altFlows" class="form-control" rows="4"
+                                placeholder="If validation fails..."></textarea>
+                        </div>
+
+                        <div class="section-header">
+                            <h2 class="h5 mb-0">Involved Actors</h2>
                         </div>
 
                         <div class="mb-5">
-                            <div th:if="${#lists.isEmpty(useCases)}" class="text-muted small italic">
-                                No use cases defined in this project.
+                            <div th:if="${#lists.isEmpty(actors)}" class="text-muted small italic">
+                                No actors defined in this project. <a
+                                    th:href="@{/projects/{id}/actors/new(id=${project.id})}">Create one first?</a>
                             </div>
                             <div class="d-flex flex-wrap gap-2">
-                                <label th:each="uc : ${useCases}" class="uc-toggle mr-2">
-                                    <input type="checkbox" name="useCaseIds" th:value="${uc.id}">
-                                    <span th:text="${uc.title}">Use Case Title</span>
+                                <label th:each="actor : ${actors}" class="actor-checkbox mr-2">
+                                    <input type="checkbox" name="actorIds" th:value="${actor.id}">
+                                    <span th:text="${actor.name}">Actor Name</span>
                                 </label>
                             </div>
                         </div>
 
-                        <div class="pt-4 border-top border-soft d-flex justify-content-between align-items-center">
-                            <button type="submit" class="btn btn-premium">Save CRC Card</button>
+                        <div class="pt-4 border-top border-glass d-flex justify-content-between align-items-center">
+                            <button type="submit" class="btn btn-premium">Create Use Case</button>
                             <a th:href="@{/projects/{id}(id=${project.id})}" class="text-muted">Cancel</a>
                         </div>
                     </form>
