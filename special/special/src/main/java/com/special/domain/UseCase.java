@@ -10,22 +10,22 @@ import java.util.Set;
 @Table(name = "useCases")
 public class UseCase {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // da fak
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false) // whats nullable
     private String title;
 
-    @Column(columnDefinition = "TEXT") // ti fash
+    @Column(name = "main_flow", columnDefinition = "TEXT")
     private String mainFlow;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "alt_flows", columnDefinition = "TEXT")
     private String altFlows;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "postconditions", columnDefinition = "TEXT")
     private String postconditions;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "preconditions", columnDefinition = "TEXT")
     private String preconditions;
 
     @ManyToMany
