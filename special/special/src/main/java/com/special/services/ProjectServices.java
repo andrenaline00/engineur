@@ -201,7 +201,7 @@ public class ProjectServices {
             String collaborations, List<Long> useCaseIds) {
 
         CRCCard card = getCrcCard(cardId);
-        card.setClassname(className);
+        card.setClassName(className);
         card.setResponsibilities(responsibilities);
         card.setCollaborations(collaborations);
 

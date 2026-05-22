@@ -48,11 +48,11 @@ public class CRCCard {
 		this.id = id;
 	}
 
-	public void setClassname(String className) {
+	public void setClassName(String className) {
 		this.className = className;
 	}
 
-	public String getclassname() {
+	public String getClassName() {
 		return className;
 	}
 
