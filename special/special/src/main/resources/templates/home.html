@@ -14,47 +14,48 @@
 
     <title>Special</title>
 </head>
-<body>
+
+<body th:style="|background-image: url('@{/images/background.jpg}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;|">
 
 <!-- Navbar -->
 <nav class="navbar navbar-dark">
     <a class="navbar-brand font-weight-bold mx-auto" th:href="@{/}">Special</a>
 </nav>
 
-
 <!-- Hero -->
 <section class="container text-center py-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
+            <div class="card p-4 custom-card">
 
-            <h1 class="display-4 font-weight-bold mb-3">
-                Design &amp; <span class="text-pink">Visualize</span> Requirements
-            </h1>
+                <h1 class="display-4 font-weight-bold mb-3">
+                    Design &amp; <span class="text-pink">Visualize</span> Requirements
+                </h1>
 
-            <p class="lead text-muted mb-4">
-                Capture, design, and validate software specifications through CRC cards,
-                use cases, and class diagrams.
-            </p>
+                <p class="lead text-muted mb-4">
+                    Capture, design, and validate software specifications through CRC cards,
+                    use cases, and class diagrams.
+                </p>
 
-            <a th:href="@{/login}" class="btn btn-primary btn-lg px-5">Sign in</a>
-            <p class="mt-3 text-muted">
-                <small>New here? <a th:href="@{/register}">Create an account</a></small>
-            </p>
+                <div>
+                    <a th:href="@{/login}" class="btn btn-primary btn-lg px-5">Sign in</a>
+                </div>
+                <p class="mt-3 mb-0 text-muted">
+                    <small>New here? <a th:href="@{/register}">Create an account</a></small>
+                </p>
 
+            </div>
         </div>
     </div>
 </section>
 
-
-
 <!-- Features -->
-<section class="container py-5">
+<section class="container py-4">
     <div class="row">
 
         <div class="col-md-4 mb-3">
             <div class="feature-card">
-
-                <h5 class="font-weight-bold mb-2">Use Cases</h5>
+                <h5 class="font-weight-bold mb-2 text-pink">Use Cases</h5>
                 <p class="text-muted small mb-0">
                     Model actors and scenarios to capture system behavior with clarity.
                 </p>
@@ -63,8 +64,7 @@
 
         <div class="col-md-4 mb-3">
             <div class="feature-card">
-
-                <h5 class="font-weight-bold mb-2">CRC Cards</h5>
+                <h5 class="font-weight-bold mb-2 text-pink">CRC Cards</h5>
                 <p class="text-muted small mb-0">
                     Organize classes, responsibilities, and collaborations the right way.
                 </p>
@@ -73,7 +73,7 @@
 
         <div class="col-md-4 mb-3">
             <div class="feature-card">
-                <h5 class="font-weight-bold mb-2">UML Diagrams</h5>
+                <h5 class="font-weight-bold mb-2 text-pink">UML Diagrams</h5>
                 <p class="text-muted small mb-0">
                     Generate class and use case diagrams automatically from your models.
                 </p>
@@ -83,61 +83,10 @@
     </div>
 </section>
 
-
-
-    <style>
-        /* Subtle page polish — kept here so main.css stays untouched */
-        body {
-            background-color: #fafafa;
-        }
-        .hero-tag {
-            display: inline-block;
-            background: rgba(124, 58, 237, 0.1);
-            color: var(--my-purple);
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 999px;
-            margin-bottom: 16px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-        .feature-card {
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 28px 22px;
-            height: 100%;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.08);
-            border-color: var(--my-purple);
-        }
-        .feature-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--my-purple), var(--my-pink));
-            color: #fff;
-            border-radius: 10px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 14px;
-        }
-    </style>
-
-
-
-
-
 <!-- Footer -->
-<footer class="container py-4 text-center text-muted">
+<footer class="container py-4 text-center">
     <hr/>
-    <small>&copy; 2026 Special</small>
+    <small class="footer-text">&copy; 2026 Special Tools by Softies Team</small>
 </footer>
 
 <!-- Bootstrap JS -->

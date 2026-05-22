@@ -14,13 +14,13 @@
     <title>New Project — Special</title>
 </head>
 
-<body class="bg-light">
-    <div class="min-vh-100 d-flex align-items-center py-5" style="background: linear-gradient(135deg, #f8f5ff 0%, #ffffff 45%, #fdf2f8 100%);">
+<body th:style="|background-image: url('@{/images/background.jpg}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;|">
+    <div class="min-vh-100 d-flex align-items-center py-5" style="background: linear-gradient(135deg, rgba(248, 245, 255, 0.72) 0%, rgba(255, 255, 255, 0.62) 45%, rgba(253, 242, 248, 0.72) 100%);">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-8 col-xl-7">
                     <div class="card border-0 shadow-lg overflow-hidden">
-                        <div class="card-header text-white py-4" style="background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);">
+                        <div class="card-header text-white py-4" style="background: linear-gradient(135deg, var(--my-purple) 0%, var(--my-pink) 100%);">
                             <small class="d-block text-uppercase font-weight-bold mb-1" style="letter-spacing: .12em; opacity: .85;">Special workspace</small>
                             <h1 class="h3 mb-1">Create a new project</h1>
                             <p class="mb-0" style="opacity: .9;">Start a workspace for organizing use cases, actors, and CRC cards.</p>
@@ -57,6 +57,19 @@
         </div>
     </div>
 
+
+
+    <!-- Footer -->
+    <footer class="container py-4 text-center">
+        <hr/>
+        <small class="text-muted">&copy; 2026 Special Tools by Softies Team</small>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
+
 </body>
+
 
 </html>
