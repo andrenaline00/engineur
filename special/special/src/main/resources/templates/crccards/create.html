@@ -20,86 +20,30 @@
     <title>New CRC Card | Special</title>
 
     <style>
-        :root {
-            --primary: #7c3aed;
-            --primary-light: #a78bfa;
-            --accent: #ec4899;
-            --bg-light: #f5f3ff;
-            --border-soft: #e2e8f0;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: #1e293b;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-        }
-
         .premium-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(245, 237, 228, 0.8);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(70, 29, 58, 0.15);
             border-radius: 24px;
             padding: 3rem;
-            box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.1);
-        }
-
-        h1,
-        h2 {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
+            box-shadow: 0 25px 50px -12px rgba(70, 29, 58, 0.25);
         }
 
         .form-control {
-            background: #fff;
-            border: 1px solid var(--border-soft);
             border-radius: 12px;
-            color: #1e293b;
+            border: 1px solid rgba(70, 29, 58, 0.2);
             padding: 0.75rem 1rem;
             transition: all 0.3s ease;
         }
 
         .form-control:focus {
-            background: #fff;
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
-            outline: none;
-        }
-
-        .form-label {
-            font-weight: 600;
-            color: #64748b;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .btn-premium {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            border-radius: 12px;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-premium:hover {
-            filter: brightness(1.1);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -5px rgba(124, 58, 237, 0.5);
-        }
-
-        .section-header {
-            border-left: 3px solid var(--primary);
-            padding-left: 1rem;
-            margin: 2rem 0 1.5rem;
+            border-color: var(--my-purple) !important;
+            box-shadow: 0 0 0 4px rgba(70, 29, 58, 0.1) !important;
         }
 
         .uc-toggle {
-            background: var(--bg-light);
-            border: 1px solid var(--border-soft);
+            background: rgba(70, 29, 58, 0.05);
+            border: 1px solid rgba(70, 29, 58, 0.1);
             border-radius: 12px;
             padding: 0.6rem 1.2rem;
             margin-bottom: 0.5rem;
@@ -108,12 +52,12 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-weight: 500;
-            color: #64748b;
+            color: var(--my-purple);
         }
 
         .uc-toggle:hover {
-            border-color: var(--primary-light);
-            background: #fdf2f8;
+            border-color: var(--my-pink);
+            background: rgba(59, 0, 22, 0.05);
         }
 
         .uc-toggle input {
@@ -121,16 +65,29 @@
         }
 
         .uc-toggle:has(input:checked) {
-            border-color: var(--primary);
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+            background: var(--my-purple);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(70, 29, 58, 0.3);
+        }
+
+        .section-header {
+            border-left: 3px solid var(--my-pink);
+            padding-left: 1rem;
+            margin: 2rem 0 1.5rem;
         }
     </style>
 </head>
 
-<body>
+<body
+    th:style="|background-image: url('@{/images/background.jpg}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;|">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark">
+        <a class="navbar-brand font-weight-bold mx-auto" th:href="@{/}">Special</a>
+    </nav>
+
     <div class="container py-5">
+
         <div class="row justify-content-center">
             <div class="col-lg-10 col-xl-8">
 
@@ -140,7 +97,7 @@
                 </a>
 
                 <div class="premium-card">
-                    <h1 class="mb-2" style="color: var(--primary);">New CRC Card</h1>
+                    <h1 class="mb-2 text-pink">New CRC Card</h1>
                     <p class="text-muted mb-5">Define Class, Responsibility, and Collaboration mapping.</p>
 
                     <form th:action="@{/projects/{projectID}/crccards(projectID=${project.id})}" method="post">
@@ -151,7 +108,7 @@
                         </div>
 
                         <div class="section-header">
-                            <h2 class="h5 mb-0">Core Attributes</h2>
+                            <h2 class="h5 mb-0 text-pink">Core Attributes</h2>
                         </div>
 
                         <div class="form-group mb-4">
@@ -167,7 +124,7 @@
                         </div>
 
                         <div class="section-header">
-                            <h2 class="h5 mb-0">Linked Use Cases</h2>
+                            <h2 class="h5 mb-0 text-pink">Linked Use Cases</h2>
                         </div>
 
                         <div class="mb-5">
@@ -182,8 +139,9 @@
                             </div>
                         </div>
 
-                        <div class="pt-4 border-top border-soft d-flex justify-content-between align-items-center">
-                            <button type="submit" class="btn btn-premium">Save CRC Card</button>
+                        <div class="pt-4 border-top d-flex justify-content-between align-items-center"
+                            style="border-color: var(--my-pink) !important;">
+                            <button type="submit" class="btn btn-primary px-4">Save CRC Card</button>
                             <a th:href="@{/projects/{id}(id=${project.id})}" class="text-muted">Cancel</a>
                         </div>
                     </form>
@@ -191,6 +149,16 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="container py-4 text-center">
+        <hr />
+        <small class="footer-text">&copy; 2026 Special Tools by Softies Team</small>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>
