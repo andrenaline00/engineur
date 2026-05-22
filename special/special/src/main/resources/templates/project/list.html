@@ -10,9 +10,70 @@
      <!-- Custom CSS -->
      <link rel="stylesheet" th:href="@{/css/main.css}" />
 
-    <title>Title</title>
+    <title>Projects — Special</title>
 </head>
-<body>
+<body class="bg-light">
+    <div class="min-vh-100 py-5" style="background: linear-gradient(135deg, #f8f5ff 0%, #ffffff 45%, #fdf2f8 100%);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-9">
+                    <div class="card border-0 shadow-lg overflow-hidden">
+                        <div class="card-header text-white py-4" style="background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);">
+                            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center">
+                                <div>
+                                    <small class="d-block text-uppercase font-weight-bold mb-1" style="letter-spacing: .12em; opacity: .85;">Special workspace</small>
+                                    <h1 class="h3 mb-1">All projects</h1>
+                                    <p class="mb-0" style="opacity: .9;">Open any workspace, or create a new one from here.</p>
+                                </div>
+                                <a th:href="@{/projects/new}" class="btn btn-light text-dark mt-3 mt-sm-0">New Project</a>
+                            </div>
+                        </div>
 
+                        <div class="card-body p-4 p-md-5">
+                            <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                                <span th:text="${success}">Success</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div th:if="${#lists.isEmpty(projects)}" class="border rounded-lg bg-white p-4 text-center">
+                                <h2 class="h5 mb-2">No projects yet</h2>
+                                <p class="text-muted mb-3">Create your first project to begin organizing requirements.</p>
+                                <a th:href="@{/projects/new}" class="btn btn-primary">Create Project</a>
+                            </div>
+
+                            <div th:if="${!#lists.isEmpty(projects)}" class="list-group">
+                                <div th:each="project : ${projects}" class="list-group-item list-group-item-action flex-column align-items-start py-3">
+                                    <div class="d-flex w-100 justify-content-between align-items-start">
+                                        <div class="pr-3">
+                                            <h5 class="mb-1" th:text="${project.name}">Project name</h5>
+                                            <p class="mb-2 text-muted" th:text="${project.description}">Project description</p>
+                                        </div>
+                                        <span class="badge badge-light border text-uppercase">Project</span>
+                                    </div>
+                                    <div class="d-flex flex-wrap mt-2">
+                                        <a th:href="@{/projects/{id}(id=${project.id})}" class="btn btn-sm btn-primary mr-2 mb-2">Open</a>
+                                        <a th:href="@{/projects/{id}(id=${project.id})}" class="btn btn-sm btn-outline-secondary mr-2 mb-2">Manage</a>
+                                        <form th:action="@{/projects/{id}/delete(id=${project.id})}" method="post" class="m-0 mb-2" onsubmit="return confirm('Delete this project?');">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center text-muted small mt-4">
+                                Use the dashboard for quick navigation, and this page for the full project list.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
 </body>
 </html>

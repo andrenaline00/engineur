@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+
+    <title th:text="'Error ' + ${status} + ' — Special'">Error — Special</title>
+</head>
+<body>
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="text-center" style="max-width: 520px;">
+
+        <!-- Big status code, falls back to "Error" if status is missing -->
+        <h1 class="display-1 font-weight-bold text-pink mb-2"
+            th:text="${status} ?: 'Error'">500</h1>
+
+        <!-- Friendly headline based on status range -->
+        <h2 class="mb-3" th:switch="${status}">
+            <span th:case="400">Bad Request</span>
+            <span th:case="401">Not Authorized</span>
+            <span th:case="403">Forbidden</span>
+            <span th:case="404">Page Not Found</span>
+            <span th:case="405">Method Not Allowed</span>
+            <span th:case="500">Internal Server Error</span>
+            <span th:case="503">Service Unavailable</span>
+            <span th:case="*">Something Went Wrong</span>
+        </h2>
+
+        <p class="text-muted mb-4">
+            Sorry, an unexpected problem occurred.<br/>
+            Please try again or return to the dashboard.
+        </p>
+
+        <div class="mb-4">
+            <a th:href="@{/}" class="btn btn-primary mr-2">Home</a>
+            <a href="javascript:history.back()" class="btn btn-outline-secondary">Back</a>
+        </div>
+
+        <!-- Show technical details if Spring provided them -->
+        <div th:if="${path}" class="d-inline-block border rounded px-3 py-2 bg-light text-left">
+            <small class="text-muted d-block">
+                <strong class="text-pink">Path:</strong>
+                <span th:text="${path}">/unknown</span>
+            </small>
+            <small class="text-muted d-block" th:if="${error}">
+                <strong class="text-pink">Error:</strong>
+                <span th:text="${error}">Unknown</span>
+            </small>
+            <small class="text-muted d-block" th:if="${message != null and !#strings.isEmpty(message)}">
+                <strong class="text-pink">Message:</strong>
+                <span th:text="${message}">No details</span>
+            </small>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

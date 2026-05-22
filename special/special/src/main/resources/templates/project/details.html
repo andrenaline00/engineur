@@ -11,9 +11,94 @@
     <link rel="stylesheet" th:href="@{/css/main.css}" />
 
 
-    <title>Title</title>
+    <title>Project Details — Special</title>
 </head>
-<body>
+<body class="bg-light">
+    <div class="min-vh-100 py-5" style="background: linear-gradient(135deg, #f8f5ff 0%, #ffffff 45%, #fdf2f8 100%);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-9">
+                    <div class="card border-0 shadow-lg overflow-hidden">
+                        <div class="card-header text-white py-4" style="background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);">
+                            <small class="d-block text-uppercase font-weight-bold mb-1" style="letter-spacing: .12em; opacity: .85;">Special workspace</small>
+                            <h1 class="h3 mb-1" th:text="${project.name}">Project name</h1>
+                            <p class="mb-0" style="opacity: .9;" th:text="${project.description}">Project description</p>
+                        </div>
 
+                        <div class="card-body p-4 p-md-5">
+                            <div class="row text-center mb-4">
+                                <div class="col-4">
+                                    <div class="border rounded-lg p-3 h-100 bg-white">
+                                        <div class="text-muted small text-uppercase font-weight-bold">Use cases</div>
+                                        <div class="h5 mb-0 mt-2" th:text="${#lists.size(useCases)}">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="border rounded-lg p-3 h-100 bg-white">
+                                        <div class="text-muted small text-uppercase font-weight-bold">Actors</div>
+                                        <div class="h5 mb-0 mt-2" th:text="${#lists.size(actors)}">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="border rounded-lg p-3 h-100 bg-white">
+                                        <div class="text-muted small text-uppercase font-weight-bold">CRC cards</div>
+                                        <div class="h5 mb-0 mt-2" th:text="${#lists.size(crcCards)}">0</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card border-0 bg-light mb-4">
+                                <div class="card-body py-3">
+                                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+                                        <div class="mb-3 mb-md-0">
+                                            <div class="font-weight-bold">Project actions</div>
+                                            <small class="text-muted">Continue building the project from the links below.</small>
+                                        </div>
+                                        <div class="d-flex flex-column flex-sm-row">
+                                            <a th:href="@{/projects}" class="btn btn-outline-secondary mr-sm-2 mb-2 mb-sm-0">Back to projects</a>
+                                            <a th:href="@{/projects/new}" class="btn btn-outline-primary mr-sm-2 mb-2 mb-sm-0">New Project</a>
+                                            <form th:action="@{/projects/{id}/delete(id=${project.id})}" method="post" class="m-0" onsubmit="return confirm('Delete this project?');">
+                                                <button type="submit" class="btn btn-outline-danger">Delete Project</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <div class="text-muted small text-uppercase font-weight-bold mb-2">Workspace</div>
+                                            <h2 class="h5 mb-2">Project hub</h2>
+                                            <p class="text-muted mb-0">Keep requirements, actors, and CRC cards together in one place.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <div class="text-muted small text-uppercase font-weight-bold mb-2">Navigation</div>
+                                            <h2 class="h5 mb-2">Switch quickly</h2>
+                                            <p class="text-muted mb-0">Return to the dashboard or project list whenever you need another workspace.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <div class="text-muted small text-uppercase font-weight-bold mb-2">Cleanup</div>
+                                            <h2 class="h5 mb-2">Delete when done</h2>
+                                            <p class="text-muted mb-0">Remove projects you no longer need to keep your workspace tidy.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

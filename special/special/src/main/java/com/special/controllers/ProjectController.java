@@ -31,12 +31,12 @@ public class ProjectController {
     public String listProjects(@AuthenticationPrincipal UserDetails principal, Model model) {
         User user = resolveUser(principal);
         model.addAttribute("projects", projectServices.getProjectsForUser(user.getId()));
-        return "projects/list";
+        return "project/list";
     }
 
     @GetMapping("/new")
     public String newProjectForm() {
-        return "projects/create";
+        return "project/new";
     }
 
     @PostMapping
@@ -57,7 +57,7 @@ public class ProjectController {
         model.addAttribute("useCases", projectServices.getUseCases(id));
         model.addAttribute("actors", projectServices.getActors(id));
         model.addAttribute("crcCards", projectServices.getCrcCards(id));
-        return "projects/view";
+        return "project/details";
     }
 
     @PostMapping("/{id}/delete")

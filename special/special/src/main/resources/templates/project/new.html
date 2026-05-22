@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+
+    <title>New Project — Special</title>
+</head>
+
+<body class="bg-light">
+    <div class="min-vh-100 d-flex align-items-center py-5" style="background: linear-gradient(135deg, #f8f5ff 0%, #ffffff 45%, #fdf2f8 100%);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+                    <div class="card border-0 shadow-lg overflow-hidden">
+                        <div class="card-header text-white py-4" style="background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);">
+                            <small class="d-block text-uppercase font-weight-bold mb-1" style="letter-spacing: .12em; opacity: .85;">Special workspace</small>
+                            <h1 class="h3 mb-1">Create a new project</h1>
+                            <p class="mb-0" style="opacity: .9;">Start a workspace for organizing use cases, actors, and CRC cards.</p>
+                        </div>
+
+                        <div class="card-body p-4 p-md-5">
+                            <div class="alert alert-light border mb-4" role="alert">
+                                Give your project a clear name and short description so it is easy to find later.
+                            </div>
+
+                            <form th:action="@{/projects}" method="post">
+                                <div class="form-group">
+                                    <label for="name" class="font-weight-bold">Project name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="e.g. Student Management System" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description" class="font-weight-bold">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="5" placeholder="Describe what this project is for..." required></textarea>
+                                </div>
+
+                                <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center mt-4">
+                                    <a th:href="@{/dashboard}" class="btn btn-outline-secondary mb-3 mb-sm-0">Back to dashboard</a>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary">Create Project</button>
+                                        <a th:href="@{/projects}" class="btn btn-outline-primary ml-2">View projects</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

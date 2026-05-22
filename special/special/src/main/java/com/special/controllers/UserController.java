@@ -1,6 +1,7 @@
 package com.special.controllers;
 
 import com.special.domain.User;
+import com.special.services.ProjectServices;
 import com.special.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserController {
 
     private final UserService userService;
+    private final ProjectServices projectServices;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ProjectServices projectServices) {
         this.userService = userService;
+        this.projectServices = projectServices;
     }
 
     @GetMapping("/")
@@ -56,6 +59,7 @@ public class UserController {
     @GetMapping("/dashboard")
     public String showDashboard(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
+        model.addAttribute("projects", projectServices.getProjectsForUser(user.getId()));
         return "layout/dashboard";
     }
 
