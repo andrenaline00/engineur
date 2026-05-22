@@ -70,6 +70,7 @@ body::before {
     border-color: var(--my-purple) !important;
     color: #ffffff !important;
     transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    text-align: center;
 }
 
 .btn-primary:hover,
