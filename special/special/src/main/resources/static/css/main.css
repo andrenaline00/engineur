@@ -35,6 +35,8 @@ a {
 .text-pink   { color: var(--my-pink); }
 .border-pink { border-color: var(--my-pink) !important; }
 
+
+
 .button {
 	            background-color: #7b5cb5; 
 	            border: none;
@@ -70,4 +72,9 @@ body{
 }
 	        
 .p1{font-family: "Lucida Console", "Courier New", monospace;}
+
+.p2{color : #502a50}
+
+.button50 {border-radius: 50%;}
+
 
