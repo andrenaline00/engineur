@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-     <!-- Custom CSS -->
-     <link rel="stylesheet" th:href="@{/css/main.css}" />
-
-    <title>Title</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head><meta charset="UTF-8"><title>nav fragment</title></head>
 <body>
+
+<!-- Reusable navbar fragment -->
+<nav th:fragment="navbar" class="navbar navbar-dark">
+    <a class="navbar-brand font-weight-bold" th:href="@{/}">Special</a>
+
+    <div class="ml-auto">
+        <!-- Show these only when logged in -->
+        <a th:href="@{/dashboard}" class="text-white mr-3" sec:authorize="isAuthenticated()">Dashboard</a>
+        <a th:href="@{/profile}" class="text-white mr-3" sec:authorize="isAuthenticated()">Profile</a>
+        <form th:action="@{/logout}" method="post" class="d-inline" sec:authorize="isAuthenticated()">
+            <button type="submit" class="btn btn-sm btn-outline-light">Logout</button>
+        </form>
+
+        <!-- Show these only when logged out -->
+        <a th:href="@{/login}" class="text-white mr-3" sec:authorize="!isAuthenticated()">Login</a>
+        <a th:href="@{/register}" class="text-white" sec:authorize="!isAuthenticated()">Register</a>
+    </div>
+</nav>
 
 </body>
 </html>
