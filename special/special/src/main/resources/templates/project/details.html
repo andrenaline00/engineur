@@ -46,6 +46,16 @@
                                     </div>
                                 </div>
                             </div>
+                             <!-- Diagrams -->
+                                 <div class="col-4">
+                                    <div class="border rounded-lg p-3 h-100 bg-white">
+                             <div class="text-muted small text-uppercase font-weight-bold">Generate Diagrams</div>
+                             <a th:href="@{/projects/{id}/diagrams/usecase(id=${project.id}, tool='plantuml')}" class="btn-primary">Use Case w/ PlantUML</a>
+                             <a th:href="@{/projects/{id}/diagrams/usecase(id=${project.id}, tool='nomnoml')}" class="btn-primary">Use Case w/ Nomnoml</a>
+                             <a th:href="@{/projects/{id}/diagrams/class(id=${project.id}, tool='plantuml')}" class="btn-primary">Class w/ PlantUML</a>
+                             <a th:href="@{/projects/{id}/diagrams/class(id=${project.id}, tool='nomnoml')}" class="btn-primary">Class w/ Nomnoml</a>
+                                    </div>
+                             </div>
 
                             <div class="card border-0 bg-light mb-4">
                                 <div class="card-body py-3">

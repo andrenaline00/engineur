@@ -13,76 +13,20 @@
 
     <title>Edit CRC Card | Special</title>
 
-    <style>
-        .premium-card {
-            background: rgba(245, 237, 228, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(70, 29, 58, 0.15);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 25px 50px -12px rgba(70, 29, 58, 0.25);
-        }
-
-        .form-control {
-            border-radius: 12px;
-            border: 1px solid rgba(70, 29, 58, 0.2);
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--my-purple) !important;
-            box-shadow: 0 0 0 4px rgba(70, 29, 58, 0.1) !important;
-        }
-
-        .uc-toggle {
-            background: rgba(70, 29, 58, 0.05);
-            border: 1px solid rgba(70, 29, 58, 0.1);
-            border-radius: 12px;
-            padding: 0.6rem 1.2rem;
-            margin-bottom: 0.5rem;
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            color: var(--my-purple);
-        }
-
-        .uc-toggle:hover {
-            border-color: var(--my-pink);
-            background: rgba(59, 0, 22, 0.05);
-        }
-
-        .uc-toggle input {
-            display: none;
-        }
-
-        .uc-toggle:has(input:checked) {
-            background: var(--my-purple);
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(70, 29, 58, 0.3);
-        }
-
-        .section-header {
-            border-left: 3px solid var(--my-pink);
-            padding-left: 1rem;
-            margin: 2rem 0 1.5rem;
-        }
-    </style>
+    
 </head>
 
 <body
-    th:style="|background-image: url('@{/images/background.jpg}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;|">
+    th:style="|background-image: url('@{/images/crcedit.JPG}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;|">
 
     <!-- Navbar -->
     <nav class="navbar navbar-dark">
         <a class="navbar-brand font-weight-bold mx-auto" th:href="@{/}">Special</a>
     </nav>
 
-    <div class="container py-5">
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-10 col-xl-8">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-7">
 
                 <a th:href="@{/projects/{id}(id=${project.id})}"
                     class="text-muted text-decoration-none mb-4 d-inline-block">
@@ -90,8 +34,8 @@
                 </a>
 
                 <div class="premium-card">
-                    <h1 class="mb-2 text-pink">Edit CRC Card</h1>
-                    <p class="text-muted mb-5">Refine the specifications for "<span
+                    <h1 class="h3 mb-1">Edit CRC Card</h1>
+                    <p class="mb-0" style="opacity: .9;">Refine the specifications for "<span
                             th:text="${crcCard.getclassname()}">Class</span>".</p>
 
                     <form th:action="@{/projects/{projectID}/crccards/{id}(projectID=${project.id}, id=${crcCard.id})}"

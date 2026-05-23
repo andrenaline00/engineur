@@ -4,22 +4,26 @@ import com.special.domain.CRCCard;
 import com.special.domain.Project;
 
 
-public abstract class AbstractClassDiagram implements ClassDiagramStrategy {
+public abstract class AbstractClassDiagram implements ClassStrategy {
+	
 	 @Override
-	    public final String generate(Project project) {
+	  public final String create(Project project) {
+		 
 	        StringBuilder sb = new StringBuilder();
-	        sb.append(generateHeader(project));
+	        sb.append(createHeader(project));
+	        
 	        for (CRCCard card : project.getCRCCards()) {
-	            sb.append(generateClass(card));
+	            sb.append(createClass(card));
 	        }
-	        sb.append(generateAssociations(project));
-	        sb.append(generateFooter());
+	        
+	        sb.append(createAssociations(project));
+	        sb.append(createFooter());
 	        return sb.toString();
 	    }
 
-	    protected abstract String generateHeader(Project project);
-	    protected abstract String generateClass(CRCCard card);
-	    protected abstract String generateAssociations(Project project);
-	    protected abstract String generateFooter();
+	    protected abstract String createHeader(Project project);
+	    protected abstract String createClass(CRCCard card);
+	    protected abstract String createAssociations(Project project);
+	    protected abstract String createFooter();
 
 }

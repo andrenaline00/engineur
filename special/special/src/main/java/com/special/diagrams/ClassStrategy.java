@@ -2,6 +2,6 @@ package com.special.diagrams;
 
 import com.special.domain.Project;
 
-public interface UseCaseStrategy {
+public interface ClassStrategy {
 	String create(Project project);
 }

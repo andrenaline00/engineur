@@ -7,27 +7,27 @@ import com.special.domain.UseCase;
 public class NomnomlUseCaseDiagram extends AbstractUseCaseDiagram {
 	
     @Override
-    protected String generateHeader(Project project) {
+    protected String createHeader(Project project) {
         return "#title: " + project.getName() + " - Use Case Diagram\n\n";
     }
 
     @Override
-    protected String generateActor(Actor actor) {
+    protected String createActor(Actor actor) {
         return "[<actor> " + actor.getName() + "]\n";
     }
 
     @Override
-    protected String generateUseCase(UseCase useCase) {
+    protected String createUseCase(UseCase useCase) {
         return "[<usecase> " + useCase.getTitle() + "]\n";
     }
 
     @Override
-    protected String generateAssociation(Actor actor, UseCase useCase) {
+    protected String createAssociation(Actor actor, UseCase useCase) {
         return "[<actor> " + actor.getName() + "] -> [<usecase> " + useCase.getTitle() + "]\n";
     }
 
     @Override
-    protected String generateFooter() {
+    protected String createFooter() {
         return "";
     }
 

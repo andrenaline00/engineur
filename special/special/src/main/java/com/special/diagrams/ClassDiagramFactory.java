@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClassDiagramFactory {
 
-    public ClassDiagramStrategy create(String tool) {
+    public ClassStrategy create(String tool) {
         return switch (tool.toLowerCase()) {
         
             case "plantuml" -> new PlantUMLClassDiagram();

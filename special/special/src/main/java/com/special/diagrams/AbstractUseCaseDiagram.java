@@ -5,29 +5,32 @@ import com.special.domain.Project;
 import com.special.domain.UseCase;
 
 public abstract class AbstractUseCaseDiagram implements UseCaseStrategy{
+	
 	 @Override
-	    public final String generate(Project project) {
+	 public final String create(Project project) {
+		 
 	        StringBuilder sb = new StringBuilder();
-	        sb.append(generateHeader(project));
+	        sb.append(createHeader(project));
+	        
 	        for (Actor actor : project.getActors()) {
-	            sb.append(generateActor(actor));
+	            sb.append(createActor(actor));
 	        }
 	        for (UseCase useCase : project.getUseCases()) {
-	            sb.append(generateUseCase(useCase));
+	            sb.append(createUseCase(useCase));
 	        }
 	        for (UseCase useCase : project.getUseCases()) {
 	            for (Actor actor : useCase.getActors()) {
-	                sb.append(generateAssociation(actor, useCase));
+	                sb.append(createAssociation(actor, useCase));
 	            }
 	        }
-	        sb.append(generateFooter());
+	        sb.append(createFooter());
 	        return sb.toString();
 	    }
 
-	    protected abstract String generateHeader(Project project);
-	    protected abstract String generateActor(Actor actor);
-	    protected abstract String generateUseCase(UseCase useCase);
-	    protected abstract String generateAssociation(Actor actor, UseCase useCase);
-	    protected abstract String generateFooter();
+	    protected abstract String createHeader(Project project);
+	    protected abstract String createActor(Actor actor);
+	    protected abstract String createUseCase(UseCase useCase);
+	    protected abstract String createAssociation(Actor actor, UseCase useCase);
+	    protected abstract String createFooter();
 
 }

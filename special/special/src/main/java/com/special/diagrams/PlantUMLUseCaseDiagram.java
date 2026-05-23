@@ -6,32 +6,38 @@ import com.special.domain.UseCase;
 
 public class PlantUMLUseCaseDiagram extends AbstractUseCaseDiagram {
 	
-	 @Override
-	    protected String generateHeader(Project project) {
+		@Override
+	    protected String createHeader(Project project) {
+			
 	        return "@startuml\ntitle " + project.getName() + " - Use Case Diagram\n\n";
 	    }
 
 	    @Override
-	    protected String generateActor(Actor actor) {
+	    protected String createActor(Actor actor) {
+	    	
 	        return "actor \"" + actor.getName() + "\" as " + sanitize(actor.getName()) + "\n";
 	    }
 
 	    @Override
-	    protected String generateUseCase(UseCase useCase) {
+	    protected String createUseCase(UseCase useCase) {
+	    	
 	        return "usecase \"" + useCase.getTitle() + "\" as " + sanitize(useCase.getTitle()) + "\n";
 	    }
 
 	    @Override
-	    protected String generateAssociation(Actor actor, UseCase useCase) {
+	    protected String createAssociation(Actor actor, UseCase useCase) {
+	    	
 	        return sanitize(actor.getName()) + " --> " + sanitize(useCase.getTitle()) + "\n";
 	    }
 
 	    @Override
-	    protected String generateFooter() {
+	    protected String createFooter() {
+	    	
 	        return "\n@enduml\n";
 	    }
 
 	    private String sanitize(String name) {
+	    	
 	        return name.replaceAll("[^a-zA-Z0-9]", "_");
 	    }
 

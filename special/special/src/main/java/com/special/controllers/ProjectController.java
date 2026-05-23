@@ -45,9 +45,9 @@ public class ProjectController {
             @RequestParam(required = false) String description,
             RedirectAttributes redirectAttributes) {
         User user = resolveUser(principal);
-        projectServices.createProject(name, description, user);
+        Project newProject = projectServices.createProject(name, description, user);
         redirectAttributes.addFlashAttribute("success", "Project created.");
-        return "redirect:/projects";
+        return "redirect:/projects/" + newProject.getId();
     }
 
     @GetMapping("/{id}")

@@ -5,15 +5,18 @@ import com.special.domain.Project;
 
 public class NomnomlClassDiagram extends AbstractClassDiagram {
 	
-	 @Override
-	    protected String generateHeader(Project project) {
+	 	@Override
+	    protected String createHeader(Project project) {
+		 
 	        return "#title: " + project.getName() + " - Class Diagram\n\n";
 	    }
 
 	    @Override
-	    protected String generateClass(CRCCard card) {
+	    protected String createClass(CRCCard card) {
+	    	
 	        StringBuilder sb = new StringBuilder();
 	        sb.append("[").append(card.getClass());
+	        
 	        if (card.getResponsibilities() != null && !card.getResponsibilities().isBlank()) {
 	            sb.append("|\n");
 	            for (String resp : card.getResponsibilities().split("\n")) {
@@ -25,7 +28,8 @@ public class NomnomlClassDiagram extends AbstractClassDiagram {
 	    }
 
 	    @Override
-	    protected String generateAssociations(Project project) {
+	    protected String createAssociations(Project project) {
+	    	
 	        StringBuilder sb = new StringBuilder();
 	        for (CRCCard card : project.getCRCCards()) {
 	            if (card.getCollaborations() != null && !card.getCollaborations().isBlank()) {
@@ -42,7 +46,7 @@ public class NomnomlClassDiagram extends AbstractClassDiagram {
 	    }
 
 	    @Override
-	    protected String generateFooter() {
+	    protected String createFooter() {
 	        return "";
 	    }
 
