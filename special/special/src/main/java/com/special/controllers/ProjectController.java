@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Transactional
-@RequestMapping("/projects")
+@RequestMapping("/project")
 public class ProjectController {
 
     private final ProjectServices projectServices;
@@ -63,10 +63,10 @@ public class ProjectController {
         User user = resolveUser(auth != null ? auth.getPrincipal() : null);
 
         String finalDescription = (description != null) ? description : "";
-        Project newProject = projectServices.createProject(name, finalDescription, user.getId());
+        projectServices.createProject(name, finalDescription, user.getId());
 
         redirectAttributes.addFlashAttribute("success", "Project created.");
-        return "redirect:/projects/" + newProject.getId();
+        return "redirect:/project/" ;
     }
 
     @GetMapping("/{id}")
@@ -83,7 +83,7 @@ public class ProjectController {
     public String deleteProject(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         projectServices.deleteProject(id);
         redirectAttributes.addFlashAttribute("success", "Project deleted.");
-        return "redirect:/projects";
+        return "redirect:/project";
     }
 
     // Diagram features are currently disabled as DiagramService is not yet
