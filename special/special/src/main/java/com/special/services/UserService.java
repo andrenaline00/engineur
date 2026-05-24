@@ -40,8 +40,7 @@ public class UserService implements UserDetailsService {
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
-        user.setFullName(username); // ή βάλε ξεχωριστό field αν θες
-        user.setRole("ROLE_USER");
+      
 
         return userRepository.save(user);
     }
@@ -56,7 +55,7 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // check email ή username αλλαγή
+        // check email ή username
         if (!user.getEmail().equals(email) && userRepository.existsByEmail(email)) {
             throw new RuntimeException("Email already in use");
         }
@@ -67,7 +66,7 @@ public class UserService implements UserDetailsService {
         user.setUsername(username);
         user.setEmail(email);
 
-        // update password μόνο αν δοθεί νέο
+        // update password mono an dothei neo
         if (password != null && !password.isBlank()) {
             user.setPassword(passwordEncoder.encode(password));
         }

@@ -130,4 +130,11 @@ public class UseCase {
         this.actors.add(actor);
     }
 
+	public void setId(long l) {
+		this.id=l;
+		
+	}
+
+
+
 }
