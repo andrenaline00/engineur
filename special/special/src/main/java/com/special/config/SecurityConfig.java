@@ -15,50 +15,46 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-        // 🔐 SECURITY FILTER CHAIN
+        //SECURITY FILTER CHAIN
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
                 http
-                                // CSRF Protection
                                 .csrf(csrf -> csrf.disable())
 
-                                // SECURITY HEADERS: Prevent Clickjacking by ensuring the page can only be
-                                // framed by the same origin.
+                                //frame mono apo idio origin gia na mporei na emfanisei to h2-console
                                 .headers(headers -> headers
                                                 .frameOptions(frame -> frame.sameOrigin()))
 
-                                // AUTHORIZATION: Define which endpoints are public and which require
-                                // authentication.
+                                //define which endpoints are public and which require authentication
                                 .authorizeHttpRequests(auth -> auth
                                                 .dispatcherTypeMatchers(DispatcherType.ERROR, DispatcherType.FORWARD)
-                                                .permitAll() // Allow error and forward dispatches
+                                                .permitAll() //allow error and forward dispatches
                                                 .requestMatchers("/", "/home", "/register", "/login", "/error")
                                                 .permitAll()
-                                                // Allow access to all static resources (CSS, JS, Images, Assets,
-                                                // Favicon)
+                                                // Allow access to all static resoures such as css,js,images etc
                                                 .requestMatchers("/css/**", "/js/**", "/images/**", "/assets/**",
-                                                                "/favicon.ico")
+                                                                "/favicon.ico") //favicon irrelevant for now, but should be added to the static resources in production
                                                 .permitAll()
                                                 .anyRequest().authenticated()) // changed from authenticated() to
                                                                                // permitAll() for testing purposes,
                                                                                // should be changed back to
                                                                                // authenticated() in production
 
-                                // FORM LOGIN
+                                //form login
                                 .formLogin(form -> form
                                                 .loginPage("/login")
                                                 .defaultSuccessUrl("/dashboard", true)
                                                 .failureUrl("/login?error=true")
                                                 .permitAll())
 
-                                // REMEMBER ME BUTTON
+                                //remember me buutttonnnn
                                 .rememberMe(remember -> remember
                                                 .key("uniqueAndSecretKey123") // Should be a secure, externalized
                                                                               // property in production
-                                                .tokenValiditySeconds(86400 * 7)) // Valid for 7 days
+                                                .tokenValiditySeconds(86400 * 7)) //7 days
 
-                                // LOGOUT: Clear session and cookies upon logging out
+                                //clear session and cookies upon logging out gia na eimaste safe den pairnoume cookies
                                 .logout(logout -> logout
                                                 .logoutSuccessUrl("/login?logout")
                                                 .deleteCookies("JSESSIONID", "remember-me")
@@ -68,14 +64,13 @@ public class SecurityConfig {
                 return http.build();
         }
 
-        // PASSWORD ENCODER: Use BCrypt hashing algorithm for secure password storage.
+        //password encorder using bcrypt
         @Bean
         public PasswordEncoder passwordEncoder() {
                 return new BCryptPasswordEncoder();
         }
 
-        // AUTHENTICATION MANAGER: Expose the AuthenticationManager bean to be used for
-        // manual authentication if needed.
+        // epose the AuthenticationManager bean to be used for manual authentication if needed (ex in a custom login controller)
         @Bean
         public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
                 return config.getAuthenticationManager();

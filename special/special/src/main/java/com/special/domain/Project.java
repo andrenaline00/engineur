@@ -9,20 +9,20 @@ import java.util.List;
 @Table(name = "projects")
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // dafuq
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-incrementing primary key
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false) // name is required
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = false) // description is required
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY) //fetch user lazily to avoid loading user data unless needed
+    @JoinColumn(name = "user_id", nullable = false) //nullable = false because every project must belong to a user
     private User user;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true) // one project can have many actors, cascade all operations, remove orphan actors when removed from project
     private List<Actor> actors = new ArrayList<>();
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)

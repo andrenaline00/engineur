@@ -23,35 +23,31 @@ public class CRCCardController {
 		this.projectService = projectService;
 	}
 
+
 	@GetMapping("/new")
 	public String newCrcCardForm(@PathVariable Long projectID, Model model) {
-
-		// public String newCRCcard(Model model, @PathVariable ProjectServices
-		// projectservice, @PathVariable Long projectID) {
-
 		model.addAttribute("project", projectService.getProject(projectID));
 		model.addAttribute("useCases", projectService.getUseCases(projectID));
 
 		return "crccards/create";
-
 	}
 
 	@PostMapping
-	public String createCRCcard(@PathVariable Long projectID,
+	public String createCRCcard(@PathVariable Long projectId,
 			@RequestParam String className,
 			@RequestParam(required = false) String responsibilities,
 			@RequestParam(required = false) String collaborations,
 			@RequestParam(required = false) List<Long> useCaseIds,
 			RedirectAttributes redirectAttribute) {
 
-		projectService.createCrcCard(className, responsibilities, collaborations, useCaseIds, projectID);
+		projectService.createCrcCard(className, responsibilities, collaborations, useCaseIds, projectId);
 		redirectAttribute.addFlashAttribute("success", "CRC Card created.");
 
-		return "redirect:/projects/" + projectID;
+		return "redirect:/projects/" + projectId;
 	}
 
 	@PostMapping("/{id}")
-	public String updateCrcCard(@PathVariable Long projectID,
+	public String updateCrcCard(@PathVariable Long projectId,
 			@PathVariable Long id,
 			@RequestParam String className,
 			@RequestParam(required = false) String responsibilities,
@@ -62,29 +58,29 @@ public class CRCCardController {
 		projectService.updateCrcCard(id, className, responsibilities, collaborations, useCaseIds);
 		redirectAttributes.addFlashAttribute("success", "CRC Card updated.");
 
-		return "redirect:/projects/" + projectID;
+		return "redirect:/projects/" + projectId;
 	}
 
 	@GetMapping("/{id}/edit")
-	public String editCRCcard(@PathVariable Long projectID,
+	public String editCRCcard(@PathVariable Long projectId,
 			@PathVariable Long id,
 			Model model) {
 
-		model.addAttribute("project", projectService.getProject(projectID));
+		model.addAttribute("project", projectService.getProject(projectId));
 		model.addAttribute("crcCard", projectService.getCrcCard(id));
-		model.addAttribute("useCases", projectService.getUseCases(projectID));
+		model.addAttribute("useCases", projectService.getUseCases(projectId));
 
 		return "crccards/edit";
 	}
 
 	@PostMapping("/{id}/delete")
-	public String deleteCRCcard(@PathVariable Long projectID,
+	public String deleteCRCcard(@PathVariable Long projectId,
 			@PathVariable Long id, RedirectAttributes redirectAttributes) {
 
 		projectService.deleteCrcCard(id);
 		redirectAttributes.addFlashAttribute("success", "CRC Card deleted.");
 
-		return "redirect:/projects/" + projectID;
+		return "redirect:/projects/" + projectId;
 	}
 
 }

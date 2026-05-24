@@ -2,7 +2,7 @@ package com.special.controllers;
 
 import com.special.domain.Actor;
 import com.special.services.ProjectServices;
-//import com.special.services.ActorServices;
+import com.special.services.ActorServices;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +15,15 @@ import java.util.List;
 @RequestMapping("/projects/{projectID}/actors")
 public class ActorController {
 
-    // private final ActorServices actorService;
+    private final ActorServices actorService;
     private final ProjectServices projectService;
 
-    public ActorController(ProjectServices projectService) {
-        // this.actorService = actorService;
+    //constructor
+    public ActorController(ProjectServices projectService, ActorServices actorService) {
+        this.actorService = actorService;
         this.projectService = projectService;
     }
+
 
     @GetMapping("/new")
     public String newActor(@PathVariable Long projectID, Model model) {

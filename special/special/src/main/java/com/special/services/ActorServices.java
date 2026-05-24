@@ -43,7 +43,7 @@ public class ActorServices {
         return actorRepo.save(actor);
     }
 
-    @Transactional
+    @Transactional // this ensures that all operations within this method are executed in a single transaction,opote ean kapoio operation fails, the entire transaction will be rolled back gia na kratisoume to database mas consistent
     public void deleteActor(Long actorID) {
         Actor actor = getActor(actorID);
         // remove associations with use cases

@@ -26,44 +26,44 @@ public class UseCaseController { // to create,view,delete,update a use case
     public String newUseCase(@PathVariable Long projectID, Model model) {
         model.addAttribute("project", projectServices.getProject(projectID));
         model.addAttribute("actors", projectServices.getActors(projectID));
-        return "usecases/create"; // we have a usecase section
+        return "usecases/create"; // we have a usecase section of htmls
     }
 
     @PostMapping() // to create new resource
-    public String createNewUseCase(@PathVariable Long projectID, @RequestParam String title,
+    public String createNewUseCase(@PathVariable Long projectId, @RequestParam String title,
             @RequestParam(required = false) String preconditions,
             @RequestParam(required = false) String mainFlow, @RequestParam(required = false) String altFlows,
             @RequestParam(required = false) String postconditions,
             @RequestParam(required = false) List<Long> actorIds, RedirectAttributes redirectAttributes) {
-        projectServices.createNewUseCase(title, preconditions, mainFlow, altFlows, postconditions, actorIds, projectID);
+        projectServices.createNewUseCase(title, preconditions, mainFlow, altFlows, postconditions, actorIds, projectId);
         redirectAttributes.addFlashAttribute("success", "Use case created successfully");
-        return "redirect:/projects/" + projectID;
+        return "redirect:/project/" + projectId;
     }
 
     @GetMapping("/{id}/edit") // add path to fetch data
-    public String editUseCase(@PathVariable Long projectID, @PathVariable Long id, Model model) {
-        model.addAttribute("project", projectServices.getProject(projectID));
+    public String editUseCase(@PathVariable Long projectId, @PathVariable Long id, Model model) {
+        model.addAttribute("project", projectServices.getProject(projectId));
         model.addAttribute("useCase", projectServices.getUseCase(id));
-        model.addAttribute("actors", projectServices.getActors(projectID));
+        model.addAttribute("actors", projectServices.getActors(projectId));
         return "usecases/edit";
     }
 
     @PostMapping("/{id}")
-    public String updateUseCase(@PathVariable Long projectID, @PathVariable Long id, @RequestParam String title,
+    public String updateUseCase(@PathVariable Long projectId, @PathVariable Long id, @RequestParam String title,
             @RequestParam(required = false) String preconditions, @RequestParam(required = false) List<Long> actorIds,
             @RequestParam(required = false) String mainFlow, @RequestParam(required = false) String altFlows,
             @RequestParam(required = false) String postConditions, RedirectAttributes redirectAttributes) {
         projectServices.updateUseCase(id, title, preconditions, mainFlow, postConditions, altFlows, actorIds);
         redirectAttributes.addFlashAttribute("success", "use case updated succesfully");
-        return "redirect:/projects/" + projectID;
+        return "redirect:/project/" + projectId;
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteUseCase(@PathVariable Long projectID, @PathVariable Long id,
+    public String deleteUseCase(@PathVariable Long projectId, @PathVariable Long id,
             RedirectAttributes redirectAttributes) {
         projectServices.deleteUseCase(id);
         redirectAttributes.addFlashAttribute("Success", "Use Case Deleted Successfully");
-        return "redirect:/projects/" + projectID;
+        return "redirect:/project/" + projectId;
     }
 
 }

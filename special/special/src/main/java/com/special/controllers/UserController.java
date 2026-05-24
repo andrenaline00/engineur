@@ -38,7 +38,7 @@ public class UserController {
     public String registerUser(@ModelAttribute("user") User user, Model model, RedirectAttributes redirect) {
 
         try {
-            userService.registerUser(user.getUsername(), user.getEmail(), user.getPassword());
+            userService.registerUser(user.getUsername(), user.getEmail(), user.getPassword()); //getting username email and password
 
             model.addAttribute("success", "Registration successful! Please login.");
             return "auth/login";
@@ -65,7 +65,7 @@ public class UserController {
 
     // UPDATE PROFILE PAGE
     @GetMapping("/profile")
-    public String showProfile(@AuthenticationPrincipal User user, Model model) {
+    public String showProfile(@AuthenticationPrincipal User user, Model model) { //for clicking on navbar profile button and showing the profile page
         model.addAttribute("user", user);
         return "user/profile";
     }
@@ -80,7 +80,7 @@ public class UserController {
 
         try {
             User updatedUser = userService.updateProfile(id, username, email, password);
-            model.addAttribute("success", "Profile updated successfully!");
+            model.addAttribute("success", "Profile updated successfully!"); //profile update has id , username , email and password
             model.addAttribute("user", updatedUser);
             return "user/profile";
         } catch (RuntimeException e) {
