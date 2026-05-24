@@ -63,10 +63,10 @@ public class ProjectController {
         User user = resolveUser(auth != null ? auth.getPrincipal() : null);
 
         String finalDescription = (description != null) ? description : "";
-        projectServices.createProject(name, finalDescription, user.getId());
+        Project newProject = projectServices.createProject(name, finalDescription, user.getId());
 
         redirectAttributes.addFlashAttribute("success", "Project created.");
-        return "redirect:/project/";
+        return "redirect:/projects/" + newProject.getId();
     }
 
     @GetMapping("/{id}")
@@ -83,7 +83,7 @@ public class ProjectController {
     public String deleteProject(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         projectServices.deleteProject(id);
         redirectAttributes.addFlashAttribute("success", "Project deleted.");
-        return "redirect:/project";
+        return "redirect:/projects";
     }
 
     // Diagram features are currently disabled as DiagramService is not yet
