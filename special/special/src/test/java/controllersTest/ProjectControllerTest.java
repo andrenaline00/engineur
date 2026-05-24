@@ -35,7 +35,7 @@ class ProjectControllerTest {
     @Mock private UserService userService;
 
     private User mockUser() {
-        User user = new User("Nabla","pass" ,"nablaki@zouzouni.com",true );
+        User user = new User("Nabla","pass" ,"nablaki@zouzouni.com","Onoma","admin" );
         user.setId(1L);
         return user;
     }
@@ -78,7 +78,7 @@ class ProjectControllerTest {
     @Test
     @WithMockUser(username = "miaou@example.com")
     void viewProject_returnsViewPage() throws Exception {
-        User user = new User("Miaou", "pass" ,"Maiou@example.com",true);
+        User user = new User("Miaou", "pass" ,"Maiou@example.com","Onoma","admin");
         Project project = new Project("P1", "desc", user);
         project.setId(1L);
         when(projectService.getProject(1L)).thenReturn(project);
@@ -104,7 +104,7 @@ class ProjectControllerTest {
     @Test
     @WithMockUser(username = "alice@example.com")
     void useCaseDiagram_returnsScript() throws Exception {
-        User user = new User("Alice", "pass","alice@example.com", true);
+        User user = new User("Alice", "pass","alice@example.com", "Onoma","admin");
         Project project = new Project("P1", "desc", user);
         project.setId(1L);
         when(projectService.getProject(1L)).thenReturn(project);
@@ -119,7 +119,7 @@ class ProjectControllerTest {
     @Test
     @WithMockUser(username = "Nabla")
     void classDiagram_returnsScript() throws Exception {
-        User user = new User("Nabla","pass" ,"nablaki@zouzouni.com",true);
+        User user = new User("Nabla","pass" ,"nablaki@zouzouni.com","Onoma","admin");
         Project project = new Project("P1", "desc", user);
         project.setId(1L);
         when(projectService.getProject(1L)).thenReturn(project);

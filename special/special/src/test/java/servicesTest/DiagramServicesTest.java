@@ -39,7 +39,7 @@ class DiagramServiceTest {
                 projectService
         );
 
-        User user = new User("test", "pass" ,"test@example.com",true);
+        User user = new User("test", "pass" ,"test@example.com","Onoma","admin");
         project = new Project("TestProject", "desc", user);
         project.setId(1L);
 

@@ -38,7 +38,7 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        testUser = new User("aitheras", "pass" ,"aitheras@example.com",true);
+        testUser = new User("aitheras", "pass" ,"aitheras@example.com","Onoma","admin");
         testUser.setId(1L);
     }
 

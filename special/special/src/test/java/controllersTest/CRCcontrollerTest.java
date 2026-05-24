@@ -33,7 +33,7 @@ class CRCControllerTest {
     @MockitoBean private UserService userService;
 
     private Project mockProject() {
-        User user = new User("GG","pass", "GG@example.com",true);
+        User user = new User("GG","pass", "GG@example.com","Onoma","admin");
         Project project = new Project("P1", "desc", user);
         project.setId(1L);
         return project;

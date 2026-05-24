@@ -42,7 +42,7 @@ class ProjectServiceTest {
 
     @BeforeEach
     void setUp() {
-        user = new User("kleopatra", "pass" ,"kleopatra@example.com",true);
+        user = new User("kleopatra", "pass" ,"kleopatra@example.com","Onoma","admin");
         user.setId(1L);
         project = new Project("TestProject", "desc", user);
         project.setId(1L);

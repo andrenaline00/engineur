@@ -72,7 +72,7 @@ class AuthControllerTest {
     @Test
     void testRegisteUser_alreadyRegistered() throws Exception{
     	when(userService.registerUser(anyString(), anyString(), anyString()))
-        .thenReturn(new User("Teo","encoded", "teo@malimali.com",true));
+        .thenReturn(new User("Teo","encoded", "teo@malimali.com","Onoma","admin"));
 
 mockMvc.perform(post("/register")
                 .param("username", "Teo").param("password", "pass123")
@@ -92,7 +92,7 @@ mockMvc.perform(post("/register")
     @Test
     @WithMockUser(username = "gato@example.com")
     void profilePage_authenticated_returns200() throws Exception {
-        User user = new User("Gato","encoded", "gato@example.com",true);
+        User user = new User("Gato","encoded", "gato@example.com","Onoma","admin");
         user.setId(1L);
         when(userService.loadUserByUsername("gato@example.com")).thenReturn(user);
 

@@ -36,7 +36,7 @@ class UseCaseControllerTest {
     private UseCaseController useCaseController;
     
     private Project mockProject() {
-        User user = new User("nabla", "pass","nabla@example.com",true );
+        User user = new User("nabla", "pass","nabla@example.com","Onoma","admin" );
         Project project = new Project("P1", "desc", user);
         project.setId(1L);
         return project;
