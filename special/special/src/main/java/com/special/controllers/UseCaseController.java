@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("/projects/{projectID}/usecases")
+@RequestMapping("/projects/{projectId}/usecases")
 public class UseCaseController { // to create,view,delete,update a use case
 
     private final ProjectServices projectServices; // pedio
@@ -22,13 +22,13 @@ public class UseCaseController { // to create,view,delete,update a use case
         this.projectServices = projectServices;
     }
 
-
     @GetMapping
     public String listUseCases(@PathVariable("projectID") Long projectId, Model model) {
         model.addAttribute("project", projectServices.getProject(projectId));
         model.addAttribute("useCases", projectServices.getUseCases(projectId));
         return "usecases/view"; // we have a usecase section of htmls
     }
+
     @GetMapping("/new") // to fetch data
     public String newUseCase(@PathVariable("projectID") Long projectId, Model model) {
         model.addAttribute("project", projectServices.getProject(projectId));
@@ -56,7 +56,8 @@ public class UseCaseController { // to create,view,delete,update a use case
     }
 
     @PostMapping("/{id}")
-    public String updateUseCase(@PathVariable("projectID") Long projectId, @PathVariable Long id, @RequestParam String title,
+    public String updateUseCase(@PathVariable("projectID") Long projectId, @PathVariable Long id,
+            @RequestParam String title,
             @RequestParam(required = false) String preconditions, @RequestParam(required = false) List<Long> actorIds,
             @RequestParam(required = false) String mainFlow, @RequestParam(required = false) String altFlows,
             @RequestParam(required = false) String postconditions, RedirectAttributes redirectAttributes) {

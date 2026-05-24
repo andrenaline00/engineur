@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.special.services.ProjectServices;
 
 @Controller
-@RequestMapping("projects/{projectID}/crccards")
+@RequestMapping("projects/{projectId}/crccards")
 public class CRCCardController {
 
 	private ProjectServices projectService;
@@ -23,11 +23,20 @@ public class CRCCardController {
 		this.projectService = projectService;
 	}
 
-
+	/*
+	 * @GetMapping("/new")
+	 * public String newCrcCardForm(@PathVariable Long projectID, Model model) {
+	 * model.addAttribute("project", projectService.getProject(projectID));
+	 * model.addAttribute("useCases", projectService.getUseCases(projectID));
+	 * 
+	 * return "crccards/create";
+	 * }
+	 */
 	@GetMapping("/new")
-	public String newCrcCardForm(@PathVariable Long projectID, Model model) {
-		model.addAttribute("project", projectService.getProject(projectID));
-		model.addAttribute("useCases", projectService.getUseCases(projectID));
+	public String newCrcCardForm(@PathVariable("projectId") Long projectId, Model model) {
+
+		model.addAttribute("project", projectService.getProject(projectId));
+		model.addAttribute("useCases", projectService.getUseCases(projectId));
 
 		return "crccards/create";
 	}
