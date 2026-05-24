@@ -50,6 +50,8 @@ public class SecurityConfig {
 
                                 //remember me buutttonnnn
                                 .rememberMe(remember -> remember
+                                                .rememberMeParameter("remember-me")
+                                                .rememberMeCookieName("remember-me")
                                                 .key("uniqueAndSecretKey123") // Should be a secure, externalized
                                                                               // property in production
                                                 .tokenValiditySeconds(86400 * 7)) //7 days
