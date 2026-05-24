@@ -4,14 +4,19 @@ import com.special.domain.Project;
 import com.special.domain.User;
 import com.special.services.ProjectServices;
 import com.special.services.UserService;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@Transactional
 @RequestMapping("/projects")
 public class ProjectController {
 
@@ -51,18 +56,8 @@ public class ProjectController {
     }
 
     @PostMapping
-    public String createProject(@AuthenticationPrincipal Object principal,
-            @RequestParam String name,
-            @RequestParam(required = false) String description,
-            RedirectAttributes redirectAttributes) {
-        User currentUser = resolveUser(principal);
-
-        // Ensure description is not null to satisfy DB constraints
-        String finalDescription = (description != null) ? description : "";
-
-        Project newProject = projectServices.createProject(name, finalDescription, currentUser);
-        redirectAttributes.addFlashAttribute("success", "Project created.");
-        return "redirect:/projects/" + newProject.getId();
+    public String createProject() {
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/{id}")
