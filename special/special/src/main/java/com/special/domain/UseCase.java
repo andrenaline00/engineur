@@ -39,16 +39,6 @@ public class UseCase {
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
-    /*
-     * do we need this?????
-     * 
-     * @ManyToMany(fetch = FetchType.LAZY)
-     * 
-     * @JoinTable(name = "useCaseCRCCards", joinColumns = @JoinColumn(name =
-     * "useCaseID"), inverseJoinColumns = @JoinColumn(name = "crcCardID"))
-     * private Set<CRCCard> crcCards = new HashSet<>();
-     */
-
     public UseCase(String title, Project project) {
         this.title = title;
         this.project = project;
@@ -91,11 +81,9 @@ public class UseCase {
         return actors;
     }
 
-    /*
-     * public Set<CRCCards> getCRCCards(){
-     * return CRCCard;
-     * }
-     */
+    public Set<CRCCard> getCRCCards() {
+        return crcCards;
+    }
 
     // SETTERS
     public void setTitle(String title) {

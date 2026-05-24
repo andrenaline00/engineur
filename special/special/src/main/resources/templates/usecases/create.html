@@ -19,128 +19,6 @@
 
     <title>New Use Case | Special</title>
 
-    <style>
-        :root {
-            --primary: #7c3aed;
-            --primary-light: #a78bfa;
-            --accent: #ec4899;
-            --bg-glass: rgba(255, 255, 255, 0.03);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --bg-dark: #0f172a;
-        }
-
-        body {
-            background-color: #f5f3ff;
-            color: #1e293b;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-        }
-
-        .mesh-bg {
-            display: none;
-        }
-
-        .premium-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(124, 58, 237, 0.1);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.1);
-        }
-
-        h1,
-        h2 {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-        }
-
-        .form-control {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            color: #1e293b;
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            background: #fff;
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
-            color: #1e293b;
-        }
-
-        .form-label {
-            font-weight: 600;
-            color: #94a3b8;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .btn-premium {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            border-radius: 12px;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-premium:hover {
-            filter: brightness(1.1);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -5px rgba(124, 58, 237, 0.5);
-        }
-
-        .actor-checkbox {
-            background: #f5f3ff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 0.6rem 1.2rem;
-            margin-bottom: 0.5rem;
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            color: #64748b;
-        }
-
-        .actor-checkbox:hover {
-            border-color: var(--primary-light);
-            background: #fdf2f8;
-        }
-
-        .actor-checkbox input {
-            display: none;
-        }
-
-        .actor-checkbox.active,
-        .actor-checkbox:has(input:checked) {
-            border-color: var(--primary);
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
-        }
-
-        .actor-checkbox:hover {
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .actor-checkbox input {
-            margin-right: 0.75rem;
-        }
-
-        .section-header {
-            border-left: 3px solid var(--primary);
-            padding-left: 1rem;
-            margin: 2rem 0 1.5rem;
-        }
-    </style>
 </head>
 
 <body>
@@ -212,7 +90,7 @@
                                 No actors defined in this project. <a
                                     th:href="@{/projects/{id}/actors/new(id=${project.id})}">Create one first?</a>
                             </div>
-                            <div class="d-flex flex-wrap gap-2">
+                            <div class="d-flex flex-wrap">
                                 <label th:each="actor : ${actors}" class="actor-checkbox mr-2">
                                     <input type="checkbox" name="actorIds" th:value="${actor.id}">
                                     <span th:text="${actor.name}">Actor Name</span>
@@ -229,6 +107,10 @@
             </div>
         </div>
     </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -65,6 +65,7 @@ public class ProjectServices {
         // return null;
     }
 
+    @Transactional
     public Actor getActor(Long actorID) {
         return actorRepo.findById(actorID).orElseThrow();
         // return null;
@@ -102,7 +103,7 @@ public class ProjectServices {
         return useCaseRepo.findByProjectId(projectID);
     }
 
-    @Transactional(readOnly = true) //for not crashing
+    @Transactional(readOnly = true)
     public UseCase getUseCase(Long useCaseID) {
         return useCaseRepo.findById(useCaseID).orElseThrow();
     }
@@ -157,25 +158,32 @@ public class ProjectServices {
     @Transactional
     public void deleteUseCase(Long useCaseID) {
         UseCase useCase = getUseCase(useCaseID);
-        // delete all related actors
+
+        Set<Actor> actors = new HashSet<>(useCase.getActors());
+        for (Actor actor : actors) {
+            actor.getUseCases().remove(useCase);
+        }
         useCase.getActors().clear();
-        /*
-         * for (CRCCard card:useCase.getCRCCards()) {
-         * card.getUseCases().remove(useCase);
-         * }
-         */
-        useCaseRepo.save(useCase);
-        useCaseRepo.deleteById(useCaseID);
+
+        Set<CRCCard> cards = new HashSet<>(useCase.getCRCCards());
+        for (CRCCard card : cards) {
+            card.getUseCases().remove(useCase);
+        }
+        useCase.getCRCCards().clear();
+
+        useCaseRepo.delete(useCase);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CRC cards services
 
+    @Transactional(readOnly = true)
     public List<CRCCard> getCrcCards(Long projectId) {
         return crcCardRepo.findByProjectId(projectId);
 
     }
 
+    @Transactional(readOnly = true)
     public CRCCard getCrcCard(Long cardId) {
         return crcCardRepo.findById(cardId)
                 .orElseThrow(() -> new IllegalArgumentException("CRC Card not found"));

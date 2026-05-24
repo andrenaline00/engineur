@@ -15,7 +15,7 @@ public class NomnomlClassDiagram extends AbstractClassDiagram {
 	    protected String createClass(CRCCard card) {
 	    	
 	        StringBuilder sb = new StringBuilder();
-	        sb.append("[").append(card.getClass());
+	        sb.append("[").append(card.getClassName());
 	        
 	        if (card.getResponsibilities() != null && !card.getResponsibilities().isBlank()) {
 	            sb.append("|\n");
