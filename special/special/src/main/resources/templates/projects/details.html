@@ -10,118 +10,155 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/main.css}" />
 
-
     <title>Project Details — Special</title>
 </head>
-<body th:style="|background-image: url('@{/images/background.jpg}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;|">
-    <!-- Navbar -->
-    <div th:replace="~{layout/navigation :: navbar}"></div>
+<body>
+<!-- Navbar -->
+<div th:replace="~{layout/navigation :: navbar}"></div>
 
-    <div class="min-vh-100 py-5" style="background: linear-gradient(135deg, rgba(248, 245, 255, 0.72) 0%, rgba(255, 255, 255, 0.62) 45%, rgba(253, 242, 248, 0.72) 100%);">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-10 col-xl-9">
-                    <div class="card border-0 shadow-lg overflow-hidden">
-                        <div class="card-header text-white py-4" style="background: linear-gradient(135deg, var(--my-purple) 0%, var(--my-pink) 100%);">
-                            <small class="d-block text-uppercase font-weight-bold mb-1" style="letter-spacing: .12em; opacity: .85;">Special workspace</small>
-                            <h1 class="h3 mb-1" th:text="${project.name}">Project name</h1>
-                            <p class="mb-0" style="opacity: .9;" th:text="${project.description}">Project description</p>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+
+            <!-- Flash message -->
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+            <!-- ===== Project header card ===== -->
+            <div class="card mb-4">
+                <div class="card-header text-white py-4"
+                     style="background: linear-gradient(135deg, var(--my-purple) 0%, var(--my-pink) 100%); border-radius: 13px 13px 0 0;">
+                    <small class="d-block text-uppercase font-weight-bold mb-1"
+                           style="letter-spacing:.12em; opacity:.85;">Special Workspace</small>
+                    <h1 class="h3 mb-1" th:text="${project.name}">Project name</h1>
+                    <p class="mb-0" style="opacity:.9;" th:text="${project.description}">Project description</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <!-- Stats -->
+                    <div class="row text-center mb-4">
+                        <div class="col-4">
+                            <div class="border rounded p-3 bg-white">
+                                <div class="text-muted small text-uppercase font-weight-bold">Use Cases</div>
+                                <div class="h4 mb-0 mt-2 text-pink" th:text="${useCases != null ? #lists.size(useCases) : 0}">0</div>
+                            </div>
                         </div>
-
-                        <div class="card-body p-4 p-md-5">
-                            <div class="row text-center mb-4">
-                                <div class="col-4">
-                                    <div class="border rounded-lg p-3 h-100 bg-white">
-                                        <div class="text-muted small text-uppercase font-weight-bold">Use cases</div>
-                                        <div class="h5 mb-0 mt-2" th:text="${#lists.size(useCases)}">0</div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="border rounded-lg p-3 h-100 bg-white">
-                                        <div class="text-muted small text-uppercase font-weight-bold">Actors</div>
-                                        <div class="h5 mb-0 mt-2" th:text="${#lists.size(actors)}">0</div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="border rounded-lg p-3 h-100 bg-white">
-                                        <div class="text-muted small text-uppercase font-weight-bold">CRC cards</div>
-                                        <div class="h5 mb-0 mt-2" th:text="${#lists.size(crcCards)}">0</div>
-                                    </div>
-                                </div>
+                        <div class="col-4">
+                            <div class="border rounded p-3 bg-white">
+                                <div class="text-muted small text-uppercase font-weight-bold">Actors</div>
+                                <div class="h4 mb-0 mt-2 text-pink" th:text="${actors != null ? #lists.size(actors) : 0}">0</div>
                             </div>
-                             <!-- Diagrams -->
-                                 <div class="col-4">
-                                    <div class="border rounded-lg p-3 h-100 bg-white">
-                             <div class="text-muted small text-uppercase font-weight-bold">Generate Diagrams</div>
-                             <a th:href="@{/projects/{id}/diagrams/usecase(id=${project.id}, tool='plantuml')}" class="btn-primary">Use Case w/ PlantUML</a>
-                             <a th:href="@{/projects/{id}/diagrams/usecase(id=${project.id}, tool='nomnoml')}" class="btn-primary">Use Case w/ Nomnoml</a>
-                             <a th:href="@{/projects/{id}/diagrams/class(id=${project.id}, tool='plantuml')}" class="btn-primary">Class w/ PlantUML</a>
-                             <a th:href="@{/projects/{id}/diagrams/class(id=${project.id}, tool='nomnoml')}" class="btn-primary">Class w/ Nomnoml</a>
-                                    </div>
-                             </div>
-
-                            <div class="card border-0 bg-light mb-4">
-                                <div class="card-body py-3">
-                                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
-                                        <div class="mb-3 mb-md-0">
-                                            <div class="font-weight-bold">Project actions</div>
-                                            <small class="text-muted">Continue building the project from the links below.</small>
-                                        </div>
-                                        <div class="d-flex flex-column flex-sm-row">
-                                            <a th:href="@{/projects}" class="btn btn-outline-secondary mr-sm-2 mb-2 mb-sm-0">Back to projects</a>
-                                            <a th:href="@{/projects/new}" class="btn btn-outline-primary mr-sm-2 mb-2 mb-sm-0">New Project</a>
-                                            <form th:action="@{/projects/{id}/delete(id=${project.id})}" method="post" class="m-0" onsubmit="return confirm('Delete this project?');">
-                                                <button type="submit" class="btn btn-outline-danger">Delete Project</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <div class="card h-100 border-0 shadow-sm">
-                                        <div class="card-body">
-                                            <div class="text-muted small text-uppercase font-weight-bold mb-2">Workspace</div>
-                                            <h2 class="h5 mb-2">Project hub</h2>
-                                            <p class="text-muted mb-0">Keep requirements, actors, and CRC cards together in one place.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="card h-100 border-0 shadow-sm">
-                                        <div class="card-body">
-                                            <div class="text-muted small text-uppercase font-weight-bold mb-2">Navigation</div>
-                                            <h2 class="h5 mb-2">Switch quickly</h2>
-                                            <p class="text-muted mb-0">Return to the dashboard or project list whenever you need another workspace.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <div class="card h-100 border-0 shadow-sm">
-                                        <div class="card-body">
-                                            <div class="text-muted small text-uppercase font-weight-bold mb-2">Cleanup</div>
-                                            <h2 class="h5 mb-2">Delete when done</h2>
-                                            <p class="text-muted mb-0">Remove projects you no longer need to keep your workspace tidy.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="border rounded p-3 bg-white">
+                                <div class="text-muted small text-uppercase font-weight-bold">CRC Cards</div>
+                                <div class="h4 mb-0 mt-2 text-pink" th:text="${crcCards != null ? #lists.size(crcCards) : 0}">0</div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Project actions -->
+                    <div class="d-flex flex-wrap" style="gap: 8px;">
+                        <a th:href="@{/projects}" class="btn btn-outline-secondary btn-sm">Back to Projects</a>
+                        <form th:action="@{/projects/{id}/delete(id=${project.id})}" method="post" class="m-0"
+                              onsubmit="return confirm('Delete this project? This cannot be undone.');">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete Project</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+
+            <!-- ===== Use Cases ===== -->
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="h5 mb-0 card-title" style="border:none;">Use Cases</h2>
+                        <a th:href="@{/projects/{id}/usecases/new(id=${project.id})}" class="btn btn-primary btn-sm">+ New Use Case</a>
+                    </div>
+
+                    <p th:if="${useCases == null or #lists.isEmpty(useCases)}" class="text-muted mb-0">
+                        No use cases yet. Add one to start modeling system behavior.
+                    </p>
+
+                    <table class="table mb-0" th:if="${useCases != null and !#lists.isEmpty(useCases)}">
+                        <thead>
+                        <tr><th style="width:70px;">ID</th><th>Title</th><th style="width:160px;">Actions</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="uc : ${useCases}">
+                            <td th:text="${uc.id}">1</td>
+                            <td th:text="${uc.title}">Title</td>
+                            <td>
+                                <a th:href="@{/projects/{pid}/usecases/{id}/edit(pid=${project.id}, id=${uc.id})}"
+                                   class="btn btn-outline-secondary btn-sm">Edit</a>
+                                <form th:action="@{/projects/{pid}/usecases/{id}/delete(pid=${project.id}, id=${uc.id})}"
+                                      method="post" class="d-inline"
+                                      onsubmit="return confirm('Delete this use case?');">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== CRC Cards ===== -->
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="h5 mb-0 card-title" style="border:none;">CRC Cards</h2>
+                        <a th:href="@{/projects/{id}/crccards/new(id=${project.id})}" class="btn btn-primary btn-sm">+ New CRC Card</a>
+                    </div>
+
+                    <p th:if="${crcCards == null or #lists.isEmpty(crcCards)}" class="text-muted mb-0">
+                        No CRC cards yet. Add one to capture class responsibilities.
+                    </p>
+
+                    <table class="table mb-0" th:if="${crcCards != null and !#lists.isEmpty(crcCards)}">
+                        <thead>
+                        <tr><th style="width:70px;">ID</th><th>Class</th><th style="width:160px;">Actions</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="card : ${crcCards}">
+                            <td th:text="${card.id}">1</td>
+                            <td th:text="${card.className}">ClassName</td>
+                            <td>
+                                <a th:href="@{/projects/{pid}/crccards/{id}/edit(pid=${project.id}, id=${card.id})}"
+                                   class="btn btn-outline-secondary btn-sm">Edit</a>
+                                <form th:action="@{/projects/{pid}/crccards/{id}/delete(pid=${project.id}, id=${card.id})}"
+                                      method="post" class="d-inline"
+                                      onsubmit="return confirm('Delete this CRC card?');">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== Diagrams ===== -->
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <h2 class="h5 mb-3 card-title" style="border:none;">Generate Diagrams</h2>
+                    <div class="d-flex flex-wrap" style="gap: 8px;">
+                        <a th:href="@{/projects/{id}/diagrams/usecase(id=${project.id}, tool='plantuml')}" class="btn btn-outline-primary btn-sm">Use Case · PlantUML</a>
+                        <a th:href="@{/projects/{id}/diagrams/usecase(id=${project.id}, tool='nomnoml')}" class="btn btn-outline-primary btn-sm">Use Case · Nomnoml</a>
+                        <a th:href="@{/projects/{id}/diagrams/class(id=${project.id}, tool='plantuml')}" class="btn btn-outline-primary btn-sm">Class · PlantUML</a>
+                        <a th:href="@{/projects/{id}/diagrams/class(id=${project.id}, tool='nomnoml')}" class="btn btn-outline-primary btn-sm">Class · Nomnoml</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="container py-4 text-center">
-        <hr/>
-        <small class="text-muted">&copy; 2026 Special Tools by Softies Team</small>
-    </footer>
+<!-- Footer -->
+<footer><small>&copy; 2026 Special Tools by Softies Team</small></footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
 </body>
 </html>

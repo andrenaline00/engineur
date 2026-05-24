@@ -47,7 +47,7 @@
                         <td th:text="${uc.title}">Title</td>
                         <td>
                             <a th:href="@{/projects/{pid}/usecases/{id}/edit(pid=${project.id}, id=${uc.id})}"
-                               class="btn btn-outline-secondary btn-sm">Edit</a>
+                               class="btn btn-outline-secondary btn-sm">Update</a>
                             <form th:action="@{/projects/{pid}/usecases/{id}/delete(pid=${project.id}, id=${uc.id})}"
                                   method="post" class="d-inline"
                                   onsubmit="return confirm('Delete this use case?');">
