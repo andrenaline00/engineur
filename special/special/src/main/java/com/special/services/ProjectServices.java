@@ -5,9 +5,10 @@ import com.special.repositories.ActorRepo;
 import com.special.repositories.CRCCardRepo;
 import com.special.repositories.ProjectRepo;
 import com.special.repositories.UseCaseRepo;
+import com.special.repositories.UserRepository;
 
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,16 +22,15 @@ public class ProjectServices {
     private final CRCCardRepo crcCardRepo;
     // gia actor repo
     private final ActorRepo actorRepo;
-    // gia diagram repo
-    // gia crc repo
+    private final UserRepository userRepository;
 
     public ProjectServices(ProjectRepo projectRepo, UseCaseRepo useCaseRepo, CRCCardRepo crcCardRepo,
-            ActorRepo actorRepo) {
+            ActorRepo actorRepo, UserRepository userRepository) {
         this.projectRepo = projectRepo;
         this.useCaseRepo = useCaseRepo;
         this.crcCardRepo = crcCardRepo;
-        // same for the other repos
         this.actorRepo = actorRepo;
+        this.userRepository = userRepository;
     }
 
     public Project getProject(Long projectID) {
@@ -45,12 +45,11 @@ public class ProjectServices {
 
     // for projects
     @Transactional
-    public Project createProject(String name, String description, User user) {
+    public Project createProject(String name, String description, Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found: " + userId));
         Project project = new Project(name, description, user);
-        project.setDescription(description);
-        
         return projectRepo.save(project);
-   
     }
 
     @Transactional

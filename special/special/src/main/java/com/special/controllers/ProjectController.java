@@ -4,9 +4,6 @@ import com.special.domain.Project;
 import com.special.domain.User;
 import com.special.services.ProjectServices;
 import com.special.services.UserService;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -56,8 +53,20 @@ public class ProjectController {
     }
 
     @PostMapping
-    public String createProject() {
-        return "redirect:/dashboard";
+    public String createProject(
+            @RequestParam String name,
+            @RequestParam(required = false) String description,
+            RedirectAttributes redirectAttributes) {
+
+        org.springframework.security.core.Authentication auth = org.springframework.security.core.context.SecurityContextHolder
+                .getContext().getAuthentication();
+        User user = resolveUser(auth != null ? auth.getPrincipal() : null);
+
+        String finalDescription = (description != null) ? description : "";
+        Project newProject = projectServices.createProject(name, finalDescription, user.getId());
+
+        redirectAttributes.addFlashAttribute("success", "Project created.");
+        return "redirect:/projects/" + newProject.getId();
     }
 
     @GetMapping("/{id}")

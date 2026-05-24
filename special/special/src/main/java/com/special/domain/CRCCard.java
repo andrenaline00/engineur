@@ -14,7 +14,7 @@ public class CRCCard {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "class_name", unique = true)
+	@Column(name = "class_name")
 	private String className;
 
 	@Column(name = "responsibilities")
