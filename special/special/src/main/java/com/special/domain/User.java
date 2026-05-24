@@ -25,15 +25,21 @@ public class User implements UserDetails {
     @Column(nullable = false) //nullable = false because every user must have an email
     private String email;
 
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
+    @Column(nullable = false)
+    private String role;
 
     @Column(nullable = false) //enabled is required to determine if the user account is active or not
     private boolean enabled;
 
-    public User(String username, String password, String email, Boolean enabled) {
+    public User(String username, String password, String email, String fullName, String role) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.fullName = fullName;
+        this.role = role;
         this.enabled = true;
     }
 
@@ -69,7 +75,21 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public boolean isEnabled() {
         return enabled;
@@ -81,11 +101,16 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "User{id=" + id + ", username='" + username + "', email='" + email 
-                + "'}";
+        return "User{id=" + id + ", username='" + username + "', email='" + email + "', fullName='" + fullName
+                + "', role='" + role + "'}";
     }
 
-    
+    // Spring Security integration
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() { //returns a collection of authorities granted to the user
+        return Collections.singletonList(
+                new SimpleGrantedAuthority(role)); //spring security uses the role field to determine the user's authorities
+    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -105,11 +130,4 @@ public class User implements UserDetails {
     public User() {
         this.enabled = true;
     }
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
