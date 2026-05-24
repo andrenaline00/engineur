@@ -73,4 +73,9 @@ public class Actor {
         this.useCases = useCases;
     }
 
+	public void setId(long l) {
+		this.id=l;
+		
+	}
+
 }

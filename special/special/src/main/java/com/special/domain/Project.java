@@ -89,4 +89,9 @@ public class Project {
         this.crcCards = crcCards;
     }
 
+	public void setId(long l) {
+		this.id=l;
+		
+	}
+
 }
