@@ -15,6 +15,9 @@
 </head>
 <body th:style="|background-image: url('@{/images/background.jpg}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;|">
 
+<!-- Navbar -->
+<div th:replace="~{layout/navigation :: navbar}"></div>
+
 <div class="container d-flex justify-content-center align-items-center min-vh-100" style="background: linear-gradient(135deg, rgba(248, 245, 255, 0.82) 0%, rgba(255, 255, 255, 0.82) 100%);">
     <div class="text-center" style="max-width: 520px;">
 
