@@ -23,14 +23,25 @@ public class ProjectController {
         this.userService = userService;
     }
 
-    private User resolveUser(UserDetails principal) {
-        return (User) userService.loadUserByUsername(principal.getUsername());
+    private User resolveUser(Object principal) {
+        if (principal == null) {
+            throw new RuntimeException("No authenticated user found");
+        }
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else if (principal instanceof User) {
+            username = ((User) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        return (User) userService.loadUserByUsername(username);
     }
 
     @GetMapping
-    public String listProjects(@AuthenticationPrincipal UserDetails principal, Model model) {
-        User user = resolveUser(principal);
-        model.addAttribute("projects", projectServices.getProjectsForUser(user.getId()));
+    public String listProjects(@AuthenticationPrincipal Object principal, Model model) {
+        User currentUser = resolveUser(principal);
+        model.addAttribute("projects", projectServices.getProjectsForUser(currentUser.getId()));
         return "project/list";
     }
 
@@ -40,12 +51,16 @@ public class ProjectController {
     }
 
     @PostMapping
-    public String createProject(@AuthenticationPrincipal UserDetails principal,
+    public String createProject(@AuthenticationPrincipal Object principal,
             @RequestParam String name,
             @RequestParam(required = false) String description,
             RedirectAttributes redirectAttributes) {
-        User user = resolveUser(principal);
-        Project newProject = projectServices.createProject(name, description, user);
+        User currentUser = resolveUser(principal);
+
+        // Ensure description is not null to satisfy DB constraints
+        String finalDescription = (description != null) ? description : "";
+
+        Project newProject = projectServices.createProject(name, finalDescription, currentUser);
         redirectAttributes.addFlashAttribute("success", "Project created.");
         return "redirect:/projects/" + newProject.getId();
     }

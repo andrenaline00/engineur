@@ -1,102 +1,127 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile — Special</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
+
 <body>
 
-<!-- Navbar (reuse the fragment) -->
-<div th:replace="~{layout/navigation :: navbar}"></div>
+    <!-- Navbar (reuse the fragment) -->
+    <div th:replace="~{layout/navigation :: navbar}"></div>
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
 
-            <!-- Avatar + name -->
-            <div class="text-center mb-4">
-                <div class="d-inline-block rounded-circle bg-white border-pink p-3 mb-2"
-                     style="border: 3px solid;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
-                         fill="none" stroke="#461d3a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
+                <!-- Avatar + name -->
+                <div class="text-center mb-4">
+                    <!-- Navbar-like links at top -->
+                    <div style="position: fixed; top: 28px; left: 28px; display: flex; gap: 24px; z-index: 10;">
+                        <a th:href="@{/dashboard}" class="back-link" style="position: static;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            Dashboard
+                        </a>
+                        <a th:href="@{/projects/new}" class="back-link" style="position: static;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            New Project
+                        </a>
+                    </div>
+                    <div class="d-inline-block rounded-circle bg-white border-pink p-3 mb-2" style="border: 3px solid;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                            stroke="#461d3a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </div>
+                    <h4 class="font-weight-bold mb-0" style="color:#fff;" th:text="${user.username}">Username</h4>
+                    <small class="text-pink">Active Account</small>
                 </div>
-                <h4 class="font-weight-bold mb-0" style="color:#fff;" th:text="${user.username}">Username</h4>
-                <small class="text-pink">Active Account</small>
-            </div>
 
-            <!-- Profile card -->
-            <div class="card">
-                <div class="card-body p-4">
+                <!-- Profile card -->
+                <div class="card">
+                    <div class="card-body p-4">
 
-                    <!-- Alerts -->
-                    <div th:if="${success}" class="alert alert-success" th:text="${success}">
-                        Profile updated successfully!
-                    </div>
-                    <div th:if="${error}" class="alert alert-danger" th:text="${error}">
-                        An error occurred.
-                    </div>
-
-                    <h5 class="card-title">Edit Profile</h5>
-
-                    <form th:action="@{/profile}" method="post">
-
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username"
-                                   th:value="${user.username}" placeholder="Enter username" required>
+                        <!-- Alerts -->
+                        <div th:if="${success}" class="alert alert-success" th:text="${success}">
+                            Profile updated successfully!
+                        </div>
+                        <div th:if="${error}" class="alert alert-danger" th:text="${error}">
+                            An error occurred.
                         </div>
 
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                   th:value="${user.email}" placeholder="Enter email" required>
-                        </div>
+                        <h5 class="card-title">Edit Profile</h5>
 
-                        <div class="form-group">
-                            <label for="password">New Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                   placeholder="Leave blank to keep current">
-                            <small class="form-text text-muted">Min. 8 characters recommended.</small>
-                        </div>
+                        <form th:action="@{/profile}" method="post">
 
-                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-                    </form>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username"
+                                    th:value="${user.username}" placeholder="Enter username" required>
+                            </div>
 
-                    <hr>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    th:value="${user.email}" placeholder="Enter email" required>
+                            </div>
 
-                    <!-- Sign out -->
-                    <div class="text-center">
-                        <small class="text-muted d-block mb-2">Account</small>
-                        <form th:action="@{/logout}" method="post">
-                            <button type="submit" class="btn btn-outline-danger btn-sm">Sign Out</button>
+                            <div class="form-group">
+                                <label for="password">New Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Leave blank to keep current">
+                                <small class="form-text text-muted">Min. 8 characters recommended.</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
                         </form>
+
+                        <hr>
+
+                        <!-- Sign out -->
+                        <div class="text-center">
+                            <small class="text-muted d-block mb-2">Account</small>
+                            <form th:action="@{/logout}" method="post">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Sign Out</button>
+                            </form>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Footer -->
-<footer>
-    <small>&copy; 2026 Special Tools by Softies Team</small>
-</footer>
+    <!-- Footer -->
+    <footer>
+        <small>&copy; 2026 Special Tools by Softies Team</small>
+    </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV"
+        crossorigin="anonymous"></script>
 
 </body>
+
 </html>
