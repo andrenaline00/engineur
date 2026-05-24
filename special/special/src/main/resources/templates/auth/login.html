@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -15,7 +14,6 @@
 </head>
 
 <body>
-
 
     <div class="header" style="text-align: center;" >
     <h1>S P E C I A L</h1>
@@ -52,13 +50,13 @@
                     </div>
 
                     <!-- Success message display -->
-                    <div th:if="${successMessage}" style="color:#942862;font-size: 1.5em"  class="alert alert-success alert-dismissible fade show" role="alert" th:utext="${successMessage}">
+                    <div th:if="${successMessage}" style="color:#942862;font-size: 1.5em"  class="alert alert-success alert-dismissible fade show" role="alert" th:text="${successMessage}">
                         <button type="button" style="color:#942862;font-size: 1.5em"  class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
-                    <button type="submit"  class=" btn-primary">Login</button>
+                    <button type="submit"  class="btn btn-primary">Login</button>
                 </form>
 
                 <hr>

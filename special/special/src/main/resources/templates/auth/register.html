@@ -20,7 +20,7 @@
 
     <hr>
     </div>
-    
+
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card shadow-sm" style="width: 420px;">
         <div class="card-body p-4">
@@ -52,15 +52,6 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password"
                            th:field="*{password}" placeholder="••••••••" required minlength="6">
-                </div>
-
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <select class="form-control" id="role" th:field="*{role}" required>
-                        <option value="">Select a role</option>
-                        <option value="USER">User</option>
-                        <option value="ADMIN">Admin</option>
-                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block mt-4">Create account</button>

@@ -15,7 +15,7 @@ public class PlantUMLClassDiagram extends AbstractClassDiagram {
 	    protected String createClass(CRCCard card) {
 	    	
 	        StringBuilder sb = new StringBuilder();
-	        sb.append("class ").append(card.getClass()).append(" {\n");
+	        sb.append("class ").append(card.getClassName()).append(" {\n");
 	        if (card.getResponsibilities() != null && !card.getResponsibilities().isBlank()) {
 	            for (String resp : card.getResponsibilities().split("\n")) {
 	                sb.append("  ").append(resp.trim()).append("\n");
