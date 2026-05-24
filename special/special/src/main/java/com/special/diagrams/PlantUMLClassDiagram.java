@@ -27,14 +27,13 @@ public class PlantUMLClassDiagram extends AbstractClassDiagram {
 
 	    @Override
 	    protected String createAssociations(Project project) {
-	    	
 	        StringBuilder sb = new StringBuilder();
 	        for (CRCCard card : project.getCRCCards()) {
 	            if (card.getCollaborations() != null && !card.getCollaborations().isBlank()) {
 	                for (String collab : card.getCollaborations().split("\n")) {
 	                    String collaborator = collab.trim();
 	                    if (!collaborator.isEmpty()) {
-	                        sb.append(card.getClass()).append(" --> ").append(collaborator).append("\n");
+	                        sb.append(sanitize(card.getClassName())).append(" --> ").append(sanitize(collaborator)).append("\n");
 	                    }
 	                }
 	            }
@@ -45,5 +44,9 @@ public class PlantUMLClassDiagram extends AbstractClassDiagram {
 	    @Override
 	    protected String createFooter() {
 	        return "\n@enduml\n";
+	    }
+
+		private String sanitize(String name) {
+	        return name.replaceAll("[^a-zA-Z0-9]", "_");
 	    }
 }
