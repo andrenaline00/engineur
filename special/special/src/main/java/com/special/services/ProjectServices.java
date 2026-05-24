@@ -47,7 +47,10 @@ public class ProjectServices {
     @Transactional
     public Project createProject(String name, String description, User user) {
         Project project = new Project(name, description, user);
+        project.setDescription(description);
+        
         return projectRepo.save(project);
+   
     }
 
     @Transactional
