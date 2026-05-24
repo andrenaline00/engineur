@@ -44,12 +44,12 @@ public class ProjectController {
     public String listProjects(@AuthenticationPrincipal Object principal, Model model) {
         User currentUser = resolveUser(principal);
         model.addAttribute("projects", projectServices.getProjectsForUser(currentUser.getId()));
-        return "project/list";
+        return "projects/list";
     }
 
     @GetMapping("/new")
     public String newProjectForm() {
-        return "project/new";
+        return "projects/new";
     }
 
     @PostMapping
@@ -76,7 +76,7 @@ public class ProjectController {
         model.addAttribute("useCases", projectServices.getUseCases(id));
         model.addAttribute("actors", projectServices.getActors(id));
         model.addAttribute("crcCards", projectServices.getCrcCards(id));
-        return "project/details";
+        return "projects/details";
     }
 
     @PostMapping("/{id}/delete")
