@@ -66,7 +66,7 @@ public class ProjectController {
         projectServices.createProject(name, finalDescription, user.getId());
 
         redirectAttributes.addFlashAttribute("success", "Project created.");
-        return "redirect:/project/" ;
+        return "redirect:/project/";
     }
 
     @GetMapping("/{id}")
