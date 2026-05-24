@@ -13,16 +13,16 @@ import java.util.Collections;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Identity strategy for auto-incrementing primary key
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true) // username is required and must be unique
     private String username;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false) //nullable = false because every user must have an email
     private String email;
 
     @Column(name = "full_name", nullable = false)
@@ -31,7 +31,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
+    @Column(nullable = false) //enabled is required to determine if the user account is active or not
     private boolean enabled;
 
     public User(String username, String password, String email, String fullName, String role) {
@@ -107,9 +107,9 @@ public class User implements UserDetails {
 
     // Spring Security integration
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<? extends GrantedAuthority> getAuthorities() { //returns a collection of authorities granted to the user
         return Collections.singletonList(
-                new SimpleGrantedAuthority(role));
+                new SimpleGrantedAuthority(role)); //spring security uses the role field to determine the user's authorities
     }
 
     @Override

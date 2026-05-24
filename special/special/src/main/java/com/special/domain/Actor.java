@@ -8,25 +8,26 @@ import java.util.Set;
 @Entity
 @Table(name = "actors")
 public class Actor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false) // name is required
     private String name;
 
     @Column
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY) // many actors can belong to one project
+    @JoinColumn(name = "project_id", nullable = false) // foreign key to projects table, not null
     private Project project;
 
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany(mappedBy = "actors") // many-to-many relationship with UseCase, mapped by the "actors" field in UseCase
     private Set<UseCase> useCases = new HashSet<>();
 
     protected Actor() {
-    } // tf is this for?
+    } // default constructor for JPA
 
     public Actor(String name, String description, Project project) {
         this.name = name;

@@ -10,11 +10,11 @@ import jakarta.persistence.*;
 public class CRCCard {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //auto-incrementing primary key
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "class_name", unique = true)
+	@Column(name = "class_name", unique = true) // class name should be unique within a project
 	private String className;
 
 	@Column(name = "responsibilities")
@@ -23,12 +23,12 @@ public class CRCCard {
 	@Column(name = "collaborations")
 	private String collaborations;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "project_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY) // many CRC cards can belong to one project
+	@JoinColumn(name = "project_id", nullable = false) // foreign key to projects table, not null
 	private Project project;
 
 	@ManyToMany
-	@JoinTable(name = "crc_card_use_cases", joinColumns = @JoinColumn(name = "crc_card_id"), inverseJoinColumns = @JoinColumn(name = "use_case_id"))
+	@JoinTable(name = "crc_card_use_cases", joinColumns = @JoinColumn(name = "crc_card_id"), inverseJoinColumns = @JoinColumn(name = "use_case_id")) // join table for many-to-many relationship with UseCase
 	private Set<UseCase> useCases = new HashSet<>();
 
 	public CRCCard(String className, Project project) {
@@ -37,7 +37,7 @@ public class CRCCard {
 	}
 
 	protected CRCCard() {
-
+		// default constructor for JPA
 	}
 
 	public Long getId() {

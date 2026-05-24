@@ -13,10 +13,10 @@ public class UseCase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false) // whats nullable
+    @Column(nullable = false) //nullable = false because every use case must have a title
     private String title;
 
-    @Column(name = "main_flow", columnDefinition = "TEXT")
+    @Column(name = "main_flow", columnDefinition = "TEXT") //columnDefinition to allow for longer text, giati main flow can be quite long
     private String mainFlow;
 
     @Column(name = "alt_flows", columnDefinition = "TEXT")
@@ -29,7 +29,7 @@ public class UseCase {
     private String preconditions;
 
     @ManyToMany
-    @JoinTable(name = "use_case_actors", joinColumns = @JoinColumn(name = "use_case_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    @JoinTable(name = "use_case_actors", joinColumns = @JoinColumn(name = "use_case_id"), inverseJoinColumns = @JoinColumn(name = "actor_id")) // join table for many-to-many relationship with Actor
     private Set<Actor> actors = new HashSet<>();
 
     @ManyToMany(mappedBy = "useCases")
@@ -55,7 +55,7 @@ public class UseCase {
     }
 
     protected UseCase() {
-
+    // default constructor for JPA
     }
 
     // GETTERS
