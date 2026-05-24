@@ -40,7 +40,7 @@ public class Project {
     }
 
     protected Project() {
-
+        // default constructor for JPA
     }
 
     // GETTERS

@@ -102,6 +102,7 @@ public class ProjectServices {
         return useCaseRepo.findByProjectId(projectID);
     }
 
+    @Transactional(readOnly = true) //for not crashing
     public UseCase getUseCase(Long useCaseID) {
         return useCaseRepo.findById(useCaseID).orElseThrow();
     }
@@ -163,6 +164,7 @@ public class ProjectServices {
          * card.getUseCases().remove(useCase);
          * }
          */
+        useCaseRepo.save(useCase);
         useCaseRepo.deleteById(useCaseID);
     }
 

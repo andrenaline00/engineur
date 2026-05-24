@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("/projects/{projectID}/usecases")
+@RequestMapping("/project/{projectID}/usecases")
 public class UseCaseController { // to create,view,delete,update a use case
 
     private final ProjectServices projectServices; // pedio
@@ -22,6 +22,13 @@ public class UseCaseController { // to create,view,delete,update a use case
         this.projectServices = projectServices;
     }
 
+
+    @GetMapping
+    public String listUseCases(@PathVariable Long projectId, Model model) {
+        model.addAttribute("project", projectServices.getProject(projectId));
+        model.addAttribute("useCases", projectServices.getUseCases(projectId));
+        return "usecases/view"; // we have a usecase section of htmls
+    }
     @GetMapping("/new") // to fetch data
     public String newUseCase(@PathVariable Long projectID, Model model) {
         model.addAttribute("project", projectServices.getProject(projectID));
@@ -37,7 +44,7 @@ public class UseCaseController { // to create,view,delete,update a use case
             @RequestParam(required = false) List<Long> actorIds, RedirectAttributes redirectAttributes) {
         projectServices.createNewUseCase(title, preconditions, mainFlow, altFlows, postconditions, actorIds, projectId);
         redirectAttributes.addFlashAttribute("success", "Use case created successfully");
-        return "redirect:/project/" + projectId;
+        return "redirect:/project/" + projectId + "/usecases";
     }
 
     @GetMapping("/{id}/edit") // add path to fetch data
@@ -52,10 +59,10 @@ public class UseCaseController { // to create,view,delete,update a use case
     public String updateUseCase(@PathVariable Long projectId, @PathVariable Long id, @RequestParam String title,
             @RequestParam(required = false) String preconditions, @RequestParam(required = false) List<Long> actorIds,
             @RequestParam(required = false) String mainFlow, @RequestParam(required = false) String altFlows,
-            @RequestParam(required = false) String postConditions, RedirectAttributes redirectAttributes) {
-        projectServices.updateUseCase(id, title, preconditions, mainFlow, postConditions, altFlows, actorIds);
+            @RequestParam(required = false) String postconditions, RedirectAttributes redirectAttributes) {
+        projectServices.updateUseCase(id, title, preconditions, mainFlow, postconditions, altFlows, actorIds);
         redirectAttributes.addFlashAttribute("success", "use case updated succesfully");
-        return "redirect:/project/" + projectId;
+        return "redirect:/project/" + projectId + "/usecases";
     }
 
     @PostMapping("/{id}/delete")
@@ -63,7 +70,7 @@ public class UseCaseController { // to create,view,delete,update a use case
             RedirectAttributes redirectAttributes) {
         projectServices.deleteUseCase(id);
         redirectAttributes.addFlashAttribute("Success", "Use Case Deleted Successfully");
-        return "redirect:/project/" + projectId;
+        return "redirect:/project/" + projectId + "/usecases";
     }
 
 }
