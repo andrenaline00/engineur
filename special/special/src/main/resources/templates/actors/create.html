@@ -41,13 +41,13 @@
 					<form th:action="@{/projects/{pid}/actors(pid=${project.id})}" method="post">
 					            <div class="form-group">
 					                <label for="name">Actor Name</label>
-					                <input type="text" id="name" name="name" required/>
+					                <input type="text" id="name" name="name" class="form-control" required>
 					            </div>
 								<div class="form-group">
-												                <label for="description">Description</label>
-												                <input type="text" id="description" name="description required/>
-												            </div>
-					
+									<label for="description">Description</label>
+									<input type="text" id="description" name="description" class="form-control">
+								</div>
+
                         <div class="pt-4 border-top border-glass d-flex justify-content-between align-items-center">
                             <button type="submit" class="btn btn-premium">Create Actor</button>
                             <a th:href="@{/projects/{id}(id=${project.id})}" class="text-muted">Cancel</a>

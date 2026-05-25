@@ -25,7 +25,7 @@
                         <h1 class="mb-1" style="color: var(--primary);">Actors</h1>
                         <p class="text-muted mb-0" th:text="${project.name}">Project</p>
                     </div>
-                    <a th:href="@{/projects/{id}/usecases/new(id=${project.id})}"
+                    <a th:href="@{/projects/{id}/actors/new(id=${project.id})}"
                        class="btn btn-premium">+ New Actor</a>
                 </div>
 
@@ -46,11 +46,11 @@
                         <td th:text="${actor.id}">1</td>
                         <td th:text="${actor.name}">Name</td>
                         <td>
-                            <a th:href="@{/projects/{pid}/actors/{id}/edit(pid=${project.id}, id=${actors.id})}"
+                            <a th:href="@{/projects/{pid}/actors/{id}/edit(pid=${project.id}, id=${actor.id})}"
                                class="btn btn-outline-secondary btn-sm">Update</a>
-                            <form th:action="@{/projects/{pid}/actors/{id}/delete(pid=${project.id}, id=${actors.id})}"
+                            <form th:action="@{/projects/{pid}/actors/{id}/delete(pid=${project.id}, id=${actor.id})}"
                                   method="post" class="d-inline"
-                                  onsubmit="return confirm('Delete this use case?');">
+                                  onsubmit="return confirm('Delete this actor?');">
                                 <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                             </form>
                         </td>
