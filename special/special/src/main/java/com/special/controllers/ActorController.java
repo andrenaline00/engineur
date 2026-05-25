@@ -49,7 +49,7 @@ public class ActorController {
         return "actors/list";
     }
 
-    @GetMapping("/{actorID}")
+    @GetMapping("/{actorID}/edit")
     public String editActor(@PathVariable Long projectID, @PathVariable Long actorID, Model model) {
         model.addAttribute("project", projectService.getProject(projectID));
         model.addAttribute("actor", projectService.getActor(actorID));

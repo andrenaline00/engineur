@@ -95,6 +95,7 @@
                                     <input type="checkbox" name="actorIds" th:value="${actor.id}">
                                     <span th:text="${actor.name}">Actor Name</span>
                                 </label>
+								<a         th:href="@{/projects/{id}/actors/new(id=${project.id})}">Create another actor</a>
                             </div>
                         </div>
 

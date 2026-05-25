@@ -82,6 +82,7 @@
                                        th:checked="${useCase.actors != null and useCase.actors.contains(actor)}">
                                 <span th:text="${actor.name}">Actor Name</span>
                             </label>
+							<a th:href="@{/projects/{id}/actors/new(id=${project.id})}">Create another actor?</a>
                         </div>
                     </div>
 

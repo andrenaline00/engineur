@@ -71,6 +71,8 @@
                             class="btn btn-outline-secondary btn-sm mr-2">Use Cases</a>
                         <a th:href="@{/projects/{id}/crc(id=${project.id})}"
                             class="btn btn-outline-secondary btn-sm">CRC Cards</a>
+							<a th:href="@{/projects/{id}/actors(id=${project.id})}"
+							class="btn btn-outline-secondary btn-sm">Actors</a>
 
                         <form th:action="@{/projects/{id}/delete(id=${project.id})}" method="post" class="mt-3">
                             <button type="submit" class="btn btn-danger btn-sm btn-block">Delete Project</button>

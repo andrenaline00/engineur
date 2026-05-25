@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+
+    <title>New Actor | Special</title>
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div th:replace="~{layout/navigation :: navbar}"></div>
+
+    <div class="mesh-bg"></div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+
+                <a th:href="@{/projects/{id}(id=${project.id})}"
+                    class="text-muted-alt text-decoration-none mb-4 d-inline-block">
+                    &larr; Back to <span th:text="${project.name}">Project</span>
+                </a>
+
+                <div class="premium-card">
+                    <h1 class="mb-2" style="color: var(--primary);">Create Actor</h1>
+					<form th:action="@{/projects/{pid}/actors(pid=${project.id})}" method="post">
+					            <div class="form-group">
+					                <label for="name">Actor Name</label>
+					                <input type="text" id="name" name="name" required/>
+					            </div>
+								<div class="form-group">
+												                <label for="description">Description</label>
+												                <input type="text" id="description" name="description required/>
+												            </div>
+					
+                        <div class="pt-4 border-top border-glass d-flex justify-content-between align-items-center">
+                            <button type="submit" class="btn btn-premium">Create Actor</button>
+                            <a th:href="@{/projects/{id}(id=${project.id})}" class="text-muted">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
+</body>
+
+</html>
