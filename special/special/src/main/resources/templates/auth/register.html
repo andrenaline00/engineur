@@ -29,10 +29,10 @@
             <p class="text-center text-muted small mb-4">Join Special</p>
 
             <!-- Success message (e.g. coming back from redirect) -->
-            <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
+            <div th:if="${success}" class="alert alert-success" role="alert" th:text="${success}"></div>
 
             <!-- Error message -->
-            <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+            <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 
             <form th:action="@{/register}" th:object="${user}" method="post">
 

@@ -40,7 +40,9 @@ public class UserService implements UserDetailsService {
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
-      
+        user.setFullName(username); // default to username if not provided
+        user.setRole("USER"); // default role for new users
+        user.setEnabled(true);
 
         return userRepository.save(user);
     }
