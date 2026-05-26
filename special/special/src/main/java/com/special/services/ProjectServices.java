@@ -32,7 +32,8 @@ public class ProjectServices {
         this.actorRepo = actorRepo;
         this.userRepository = userRepository;
     }
-
+    
+////////////////////////////////////////////////////// for projects////////////////////////////////////////////////////////////////////
     public Project getProject(Long projectID) {
         return projectRepo.findById(projectID).orElseThrow();
         // return null;
@@ -43,7 +44,7 @@ public class ProjectServices {
         // return null;
     }
 
-    // for projects
+    
     @Transactional
     public Project createProject(String name, String description, Long userId) {
         User user = userRepository.findById(userId)
@@ -58,7 +59,7 @@ public class ProjectServices {
         projectRepo.deleteById(projectID);
     }
 
-    // for actors
+    //////////////////////////////////////////////////////////// for actors/////////////////////////////////////////
     @Transactional
     public List<Actor> getActors(Long projectID) {
         return actorRepo.findByProjectId(projectID);
@@ -97,8 +98,10 @@ public class ProjectServices {
         }
         actorRepo.deleteById(actorID);
     }
+    
+    //////////////////////////////////////////////usecases/////////////////////////////////////////////////////////////////////////////////
 
-    // for usecases
+
     public List<UseCase> getUseCases(Long projectID) {
         return useCaseRepo.findByProjectId(projectID);
     }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <title>CRC Cards | Special</title>
+</head>
+<body>
+<div th:replace="~{layout/navigation :: navbar}"></div>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <a th:href="@{/projects/{id}(id=${project.id})}"
+               class="text-muted-alt text-decoration-none mb-4 d-inline-block">
+                &larr; Back to <span th:text="${project.name}">Project</span>
+            </a>
+
+            <div class="premium-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h1 class="mb-1" style="color: var(--primary);">CRC Cards</h1>
+                        <p class="text-muted mb-0" th:text="${project.name}">Project</p>
+                    </div>
+                    <a th:href="@{/projects/{id}/crccards/new(id=${project.id})}"
+                       class="btn btn-premium">+ New CRC Card</a>
+                </div>
+
+                <div th:if="${crccards == null or #lists.isEmpty(crccards)}" class="text-muted">
+                    No CRC Cards yet. Create the first one to model system behavior.
+                </div>
+
+                <table class="table" th:if="${crccards != null and !#lists.isEmpty(crccards)}">
+                    <thead>
+                    <tr>
+                        <th style="width:80px;">ID</th>
+                        <th>Class Name</th>
+                        <th style="width:170px;">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="crc : ${crccards}">
+                        <td th:text="${crc.id}">1</td>
+                        <td th:text="${crc.className}">Name</td>
+                        <td>
+                            <a th:href="@{/projects/{pid}/crccards/{id}/edit(pid=${project.id}, id=${crc.id})}"
+                               class="btn btn-outline-secondary btn-sm">Update</a>
+                            <form th:action="@{/projects/{pid}/crccards/{id}/delete(pid=${project.id}, id=${crc.id})}"
+                                  method="post" class="d-inline"
+                                  onsubmit="return confirm('Delete this CRC Card?');">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyRFnSvTuBQFAYnZlyAqCMD9factJTB6J5/OWTstVw5U8gZrHcUlAd3zcPostV" crossorigin="anonymous"></script>
+</body>
+</html>

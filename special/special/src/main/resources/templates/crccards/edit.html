@@ -5,12 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;700&display=swap"
-        rel="stylesheet">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
@@ -19,77 +13,20 @@
 
     <title>Edit CRC Card | Special</title>
 
-    <style>
-        .premium-card {
-            background: rgba(245, 237, 228, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(70, 29, 58, 0.15);
-            border-radius: 24px;
-            padding: 3rem;
-            box-shadow: 0 25px 50px -12px rgba(70, 29, 58, 0.25);
-        }
-
-        .form-control {
-            border-radius: 12px;
-            border: 1px solid rgba(70, 29, 58, 0.2);
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--my-purple) !important;
-            box-shadow: 0 0 0 4px rgba(70, 29, 58, 0.1) !important;
-        }
-
-        .uc-toggle {
-            background: rgba(70, 29, 58, 0.05);
-            border: 1px solid rgba(70, 29, 58, 0.1);
-            border-radius: 12px;
-            padding: 0.6rem 1.2rem;
-            margin-bottom: 0.5rem;
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            color: var(--my-purple);
-        }
-
-        .uc-toggle:hover {
-            border-color: var(--my-pink);
-            background: rgba(59, 0, 22, 0.05);
-        }
-
-        .uc-toggle input {
-            display: none;
-        }
-
-        .uc-toggle:has(input:checked) {
-            background: var(--my-purple);
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(70, 29, 58, 0.3);
-        }
-
-        .section-header {
-            border-left: 3px solid var(--my-pink);
-            padding-left: 1rem;
-            margin: 2rem 0 1.5rem;
-        }
-    </style>
+    
 </head>
 
 <body
-    th:style="|background-image: url('@{/images/background.jpg}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;|">
+    th:style="|background-image: url('@{/images/crcedit.JPG}'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;|">
 
     <!-- Navbar -->
     <nav class="navbar navbar-dark">
         <a class="navbar-brand font-weight-bold mx-auto" th:href="@{/}">Special</a>
     </nav>
 
-    <div class="container py-5">
-
+    <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-10 col-xl-8">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-7">
 
                 <a th:href="@{/projects/{id}(id=${project.id})}"
                     class="text-muted text-decoration-none mb-4 d-inline-block">
@@ -97,17 +34,17 @@
                 </a>
 
                 <div class="premium-card">
-                    <h1 class="mb-2 text-pink">Edit CRC Card</h1>
-                    <p class="text-muted mb-5">Refine the specifications for "<span
-                            th:text="${crcCard.className}">Class</span>".</p>
+                    <h1 class="h3 mb-1">Edit CRC Card</h1>
+                    <p class="mb-0" style="opacity: .9;">Refine the specifications for "<span
+                            th:text="${crcCard.getClassName()}">Class</span>".</p>
 
                     <form th:action="@{/projects/{projectID}/crccards/{id}(projectID=${project.id}, id=${crcCard.id})}"
                         method="post">
 
                         <div class="form-group mb-4">
-                            <label class="form-label">Class Name</label>
-                            <input type="text" name="className" class="form-control" th:value="${crcCard.className}"
-                                required>
+                            <label class="font-weight-bold" style="color: var(--my-purple);">Class Name</label>
+                            <input type="text" name="class_name" class="form-control"
+                                th:value="${crcCard.getClassName()}" required>
                         </div>
 
                         <div class="section-header">
@@ -115,13 +52,13 @@
                         </div>
 
                         <div class="form-group mb-4">
-                            <label class="form-label">Responsibilities</label>
+                            <label class="font-weight-bold" style="color: var(--my-purple);">Responsibilities</label>
                             <textarea name="responsibilities" class="form-control" rows="4"
                                 th:text="${crcCard.responsibilities}"></textarea>
                         </div>
 
                         <div class="form-group mb-4">
-                            <label class="form-label">Collaborations</label>
+                            <label class="font-weight-bold" style="color: var(--my-purple);">Collaborations</label>
                             <textarea name="collaborations" class="form-control" rows="4"
                                 th:text="${crcCard.collaborations}"></textarea>
                         </div>
@@ -138,14 +75,29 @@
                                     <span th:text="${uc.title}">Use Case Title</span>
                                 </label>
                             </div>
+                            <div th:if="${#lists.isEmpty(useCases)}" class="text-muted small italic">
+                                No use cases configured for this project.
+                            </div>
                         </div>
 
                         <div class="pt-4 border-top d-flex justify-content-between align-items-center"
                             style="border-color: var(--my-pink) !important;">
-                            <button type="submit" class="btn btn-primary px-4">Save Changes</button>
-                            <a th:href="@{/projects/{id}(id=${project.id})}" class="text-muted">Cancel</a>
+                            <div>
+                                <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                                <a th:href="@{/projects/{id}(id=${project.id})}" class="ml-3 text-muted">Cancel</a>
+                            </div>
                         </div>
                     </form>
+
+                    <div class="mt-5 pt-4 border-top" style="border-color: rgba(0,0,0,0.1) !important;">
+                        <h5 class="text-danger font-weight-bold">Dangerous Zone</h5>
+                        <p class="text-muted small">Once deleted, this CRC card cannot be recovered.</p>
+                        <form
+                            th:action="@{/projects/{projectID}/crccards/{id}/delete(projectID=${project.id}, id=${crcCard.id})}"
+                            method="POST" onsubmit="return confirm('Are you sure you want to delete this CRC Card?');">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete CRC Card</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
