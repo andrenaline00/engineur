@@ -36,7 +36,7 @@ public class NomnomlClassDiagram extends AbstractClassDiagram {
 	                for (String collab : card.getCollaborations().split("\n")) {
 	                    String collaborator = collab.trim();
 	                    if (!collaborator.isEmpty()) {
-	                        sb.append("[").append(card.getClass()).append("] -> [")
+	                        sb.append("[").append(card.getClassName()).append("] -> [")
 	                          .append(collaborator).append("]\n");
 	                    }
 	                }
