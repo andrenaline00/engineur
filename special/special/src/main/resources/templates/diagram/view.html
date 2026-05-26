@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/main.css}" />
-    <title>Diagram — Special</title>
+    <title>Diagram | Special</title>
 </head>
 <body>
 <div th:replace="~{layout/navigation :: navbar}"></div>
@@ -22,12 +22,12 @@
                 </a>
             </div>
 
-            <!-- Η εικόνα του διαγράμματος -->
+            <!-- image of diagram -->
             <div class="text-center bg-white p-3 rounded border" th:if="${imageUrl != null}">
                 <img th:src="${imageUrl}" alt="Generated diagram" class="img-fluid"/>
             </div>
 
-            <!-- Ο κώδικας του διαγράμματος (για debugging / αντιγραφή) -->
+            <!-- source code of diagram  gia debug or copy-->
             <div class="mt-4" th:if="${diagramSource != null}">
                 <label class="text-muted small text-uppercase font-weight-bold">Diagram Source</label>
                 <pre class="bg-light p-3 rounded border" style="white-space: pre-wrap;"

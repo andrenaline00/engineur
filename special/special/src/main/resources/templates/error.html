@@ -21,7 +21,7 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100" style="background: linear-gradient(135deg, rgba(248, 245, 255, 0.82) 0%, rgba(255, 255, 255, 0.82) 100%);">
     <div class="text-center" style="max-width: 520px;">
 
-        <!-- Big status code, falls back to "Error" if status is missing -->
+        <!-- if status is missing falls back to error -->
         <h1 class="display-1 font-weight-bold text-pink mb-2"
             th:text="${status} ?: 'Error'">500</h1>
 
@@ -47,7 +47,7 @@
             <a href="javascript:history.back()" class="btn btn-outline-secondary">Back</a>
         </div>
 
-        <!-- Show technical details if Spring provided them -->
+        <!-- show technical details if Spring provided them -->
         <div th:if="${path}" class="d-inline-block border rounded px-3 py-2 bg-light text-left">
             <small class="text-muted d-block">
                 <strong class="text-pink">Path:</strong>
